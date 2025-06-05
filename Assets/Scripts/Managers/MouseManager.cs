@@ -7,9 +7,10 @@ public class MouseManager : MonoBehaviour
 {
     public static MouseManager Instance;//单例模式
 
-    public Texture2D point, doorway, attack, target, arrow;
+    public Texture2D point, doorway, attack, target, arrow;//public使其在Inspector中可见
     RaycastHit hitInfo;//射线信息
     public event Action<Vector3> OnMouseClicked;
+    public event Action<GameObject> OnEnemyClicked;
 
     void Awake()
     {
@@ -37,6 +38,9 @@ public class MouseManager : MonoBehaviour
                 case "Ground":
                     Cursor.SetCursor(target, new Vector2(16, 16), CursorMode.Auto);
                     break;
+                case "Enemy":
+                    Cursor.SetCursor(attack, new Vector2(16, 16), CursorMode.Auto);
+                    break;
             }
         }
     }
@@ -47,10 +51,9 @@ public class MouseManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hitInfo.collider != null) //左键点击
         {
             if (hitInfo.collider.gameObject.CompareTag("Ground"))
-            {
                 OnMouseClicked?.Invoke(hitInfo.point); //触发事件
-                // Debug.Log("enter into event");
-            }
+            if (hitInfo.collider.gameObject.CompareTag("Enemy"))
+                OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
         }
     }
 }
