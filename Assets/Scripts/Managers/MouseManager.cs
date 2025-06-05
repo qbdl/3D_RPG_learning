@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+public class MouseManager : MonoBehaviour
+{
+    public static MouseManager Instance;//单例模式
+
+    public Texture2D point, doorway, attack, target, arrow;
+    RaycastHit hitInfo;//射线信息
+    public event Action<Vector3> OnMouseClicked;
+
+    void Awake()
+    {
+        if (Instance != null)
+            Destroy(gameObject);
+        Instance = this;
+    }
+
+
+    void Update()//每次刷新
+    {
+        SetCursorTexture();//鼠标移动到时：换鼠标贴图
+        MouseControl();//鼠标点击时：触发事件
+    }
+
+    void SetCursorTexture()
+    {
+        // Debug.Log("enter into SetCursorTexture");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            //切换鼠标贴图
+            switch (hitInfo.collider.gameObject.tag)
+            {
+                case "Ground":
+                    Cursor.SetCursor(target, new Vector2(16, 16), CursorMode.Auto);
+                    break;
+            }
+        }
+    }
+
+    void MouseControl()
+    {
+        // Debug.Log("enter into MouseControl");
+        if (Input.GetMouseButtonDown(0) && hitInfo.collider != null) //左键点击
+        {
+            if (hitInfo.collider.gameObject.CompareTag("Ground"))
+            {
+                OnMouseClicked?.Invoke(hitInfo.point); //触发事件
+                // Debug.Log("enter into event");
+            }
+        }
+    }
+}
