@@ -51,12 +51,16 @@ public class PlayerController : MonoBehaviour
     public void MoveToTarget(Vector3 target)
     {
         StopAllCoroutines(); //停止所有协程，使得自己可以打断自己刚选择的攻击
+        if (isDead) return; //如果已经死亡，则不允许移动
+
         agent.isStopped = false; //允许移动
         agent.destination = target;
     }
 
     public void EventAttack(GameObject target)
     {
+        if (isDead) return; //如果已经死亡，则不允许移动
+
         if (target != null)
         {
             attackTarget = target;

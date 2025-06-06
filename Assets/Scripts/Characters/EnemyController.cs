@@ -7,6 +7,7 @@ public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
 
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CharacterStats))]
 
 public class EnemyController : MonoBehaviour, IEndGameObserver
 {
@@ -20,7 +21,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     public float sightRadius; // 可视范围
     public bool isGuard;// 是否为守卫
     private float speed; //原有速度
-    private GameObject attackTarget; // 攻击对象  
+    protected GameObject attackTarget; // 攻击对象  
     public float lookAtTime;// 观察时间
     private float remainLookAtTime; //剩余的观察时间
     private float lastAttackTime; // 攻击冷却时间
@@ -63,15 +64,20 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             enemyStates = EnemyStates.PATROL;
             GetNewWayPoint(); // 获取初始巡逻点
         }
-    }
-
-    void OnEnable()//启用时调用
-    {
+        //TODO:场景切换后修改掉
         GameManager.Instance.AddObserver(this); // 注册观察者
     }
 
+    //切换场景时启用
+    // void OnEnable()//启用时调用
+    // {
+    //     GameManager.Instance.AddObserver(this); // 注册观察者
+    // }
+
     void OnDisable()//销毁时调用
     {
+        if (!GameManager.IsInitialized) return; // 如果GameManager未初始化，则不执行注销操作
+
         GameManager.Instance.RemoveObserver(this); // 注销观察者
     }
 
@@ -195,7 +201,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                 break;
             case EnemyStates.DEAD:
                 coll.enabled = false; // 禁用碰撞体
-                agent.enabled = false; // 停止NavMeshAgent
+                // agent.enabled = false; // 停止NavMeshAgent
+                agent.radius = 0; // 设置NavMeshAgent半径为0，防止其他角色碰撞
                 Destroy(gameObject, 2f); // 2秒后销毁敌人对象
                 break;
             default:
@@ -271,7 +278,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     /* ---------- Animation Event ---------- */
     void Hit()
     {
-        if (attackTarget != null)//攻击的时候敌人离开了攻击范围
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))//攻击的时候敌人仍在攻击范围 & 面向目标
         {
             var targetStats = attackTarget.GetComponent<CharacterStats>(); //获取目标的角色属性脚本
             targetStats.TakeDamage(characterStats, targetStats); //调用目标的TakeDamage方法，传入攻击者和防御者的角色属性脚本

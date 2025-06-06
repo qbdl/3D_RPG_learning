@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public CharacterData_SO templateData; // 角色模板数据脚本化对象
     public CharacterData_SO characterData; // 角色数据脚本化对象
     public AttackData_SO attackData;
 
     [HideInInspector]
     public bool isCritical;
 
+    void Awake()
+    {
+        if (templateData != null)
+        {
+            characterData = Instantiate(templateData); // 克隆模板数据
+        }
+        // else
+        // {
+        //     Debug.LogError("Template data is not assigned in CharacterStats.");
+        // }
+
+        // if (attackData == null)
+        // {
+        //     Debug.LogError("Attack data is not assigned in CharacterStats.");
+        // }
+    }
 
     #region Read from Data_SO
     public int MaxHealth
