@@ -7,16 +7,17 @@ public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Animator anim;
-
+    private CharacterStats characterStats; //角色属性脚本
     private GameObject attackTarget; //记录传入的攻击目标对象
     private float lastAttackTime; //上次攻击时间(为了攻击有间隔)
 
 
-
+    /* ---------- Basic Function ---------- */
     void Awake()//在对象被加载时调用
     {
         agent = GetComponent<NavMeshAgent>();//获取前端的NavMeshAgent
         anim = GetComponent<Animator>();//获取前端的Animator
+        characterStats = GetComponent<CharacterStats>(); //获取角色属性脚本
     }
 
     void Start()//在对象启用后、第一次更新帧之前调用
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
         SwitchAnimation(); //每帧更新动画状态
         lastAttackTime -= Time.deltaTime; // 攻击冷却时间的衰减
     }
+
+    /* ---------------- --- ------------------- */
 
     private void SwitchAnimation()
     {
@@ -49,6 +52,8 @@ public class PlayerController : MonoBehaviour
         if (target != null)
         {
             attackTarget = target;
+            characterStats.isCritical = UnityEngine.Random.value < characterStats.attackData.criticalChance;//是否暴击
+
             StartCoroutine(MoveToAttackTarget()); //开始协程移动、攻击目标
         }
     }
@@ -59,8 +64,7 @@ public class PlayerController : MonoBehaviour
 
         transform.LookAt(attackTarget.transform); //面向目标
 
-        //TODO:修改攻击范围
-        while (Vector3.Distance(transform.position, attackTarget.transform.position) > 1.0f)//还没到目标面前
+        while (Vector3.Distance(transform.position, attackTarget.transform.position) > characterStats.attackData.attackRange)//还没到目标面前
         {
             agent.destination = attackTarget.transform.position;
             yield return null; //等待下一帧
@@ -71,10 +75,18 @@ public class PlayerController : MonoBehaviour
         //Attack
         if (lastAttackTime < 0)
         {
+            anim.SetBool("Critical", characterStats.isCritical);
             anim.SetTrigger("Attack"); //触发攻击动画
+
             //重置冷却时间 
-            //TODO:冷却时间的调整
-            lastAttackTime = 0.5f; //设置攻击间隔时间
+            lastAttackTime = characterStats.attackData.coolDown;
         }
+    }
+
+    /* ---------- Animation Event ---------- */
+    void Hit()
+    {
+        var targetStats = attackTarget.GetComponent<CharacterStats>(); //获取目标的角色属性脚本
+        targetStats.TakeDamage(characterStats, targetStats); //调用目标的TakeDamage方法，传入攻击者和防御者的角色属性脚本
     }
 }

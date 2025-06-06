@@ -453,6 +453,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightRadius: 8
+  isGuard: 0
+  lookAtTime: 0
+  patrolRange: 0
 --- !u!195 &354395365963922686
 NavMeshAgent:
   m_ObjectHideFlags: 0
