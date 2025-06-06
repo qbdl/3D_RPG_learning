@@ -9,9 +9,9 @@ public class Grunt : EnemyController
 
     public float kickForce = 10f; // 击力
 
-    public void KickOff()
+    public void KickOff()//这里的KickOff不造成伤害,只是击飞，仍是Hit造成伤害
     {
-        if (attackTarget != null)
+        if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))
         {
             transform.LookAt(attackTarget.transform); // 面向目标
 

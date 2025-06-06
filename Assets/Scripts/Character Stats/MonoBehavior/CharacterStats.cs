@@ -68,6 +68,13 @@ public class CharacterStats : MonoBehaviour
         //TODO:update血量UI,人物属性升级
     }
 
+    public void TakeDamage(int damage, CharacterStats defender)
+    {
+        int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
+        CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
+    }
+
+
     private int CurrentDamage()
     {
         float coreDamage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);

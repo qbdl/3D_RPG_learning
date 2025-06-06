@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     bool isDead; //是否死亡
 
+    private float stopDistance; //默认的停止距离
 
     /* ---------- Basic Function ---------- */
     void Awake()//在对象被加载时调用
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();//获取前端的NavMeshAgent
         anim = GetComponent<Animator>();//获取前端的Animator
         characterStats = GetComponent<CharacterStats>(); //获取角色属性脚本
+
+        stopDistance = agent.stoppingDistance; //记录默认的停止距离
     }
 
     void Start()//在对象启用后、第一次更新帧之前调用
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
         StopAllCoroutines(); //停止所有协程，使得自己可以打断自己刚选择的攻击
         if (isDead) return; //如果已经死亡，则不允许移动
 
+        agent.stoppingDistance = stopDistance; //正常移动时：停止距离为默认值
         agent.isStopped = false; //允许移动
         agent.destination = target;
     }
@@ -73,6 +77,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator MoveToAttackTarget()
     {
         agent.isStopped = false; //开始移动
+        agent.stoppingDistance = characterStats.attackData.attackRange; //攻击时：设置停止距离为攻击范围(防止其一直为一个较小值，而敌人较大，始终无法到达那个位置开始攻击)
 
         transform.LookAt(attackTarget.transform); //面向目标
 
@@ -98,7 +103,20 @@ public class PlayerController : MonoBehaviour
     /* ---------- Animation Event ---------- */
     void Hit()
     {
-        var targetStats = attackTarget.GetComponent<CharacterStats>(); //获取目标的角色属性脚本
-        targetStats.TakeDamage(characterStats, targetStats); //调用目标的TakeDamage方法，传入攻击者和防御者的角色属性脚本
+        if (attackTarget.CompareTag("Attackable")) //如果攻击目标是Attackable类型
+        {
+            if (attackTarget.GetComponent<Rock>() && attackTarget.GetComponent<Rock>().rockStates == Rock.RockStates.HitNothing)//攻击目标为石头
+            {
+                attackTarget.GetComponent<Rock>().rockStates = Rock.RockStates.HitEnemy; //设置其状态为攻击敌人
+                attackTarget.GetComponent<Rigidbody>().velocity = Vector3.one; //避免其被认为是HitNothing状态
+                //TODO:这里暂时冲击力使用常数用于查看效果
+                attackTarget.GetComponent<Rigidbody>().AddForce(transform.forward * 20.0f, ForceMode.Impulse); //应用冲击力
+            }
+        }
+        else
+        {
+            var targetStats = attackTarget.GetComponent<CharacterStats>(); //获取目标的角色属性脚本
+            targetStats.TakeDamage(characterStats, targetStats); //调用目标的TakeDamage方法，传入攻击者和防御者的角色属性脚本
+        }
     }
 }
