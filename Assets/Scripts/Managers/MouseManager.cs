@@ -3,22 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MouseManager : MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
-    public static MouseManager Instance;//单例模式
-
     public Texture2D point, doorway, attack, target, arrow;//public使其在Inspector中可见
     RaycastHit hitInfo;//射线信息
     public event Action<Vector3> OnMouseClicked;
     public event Action<GameObject> OnEnemyClicked;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-            Destroy(gameObject);
-        Instance = this;
+        base.Awake();
+        // DontDestroyOnLoad(gameObject); // 保持单例在场景切换时不被销毁
     }
-
 
     void Update()//每次刷新
     {

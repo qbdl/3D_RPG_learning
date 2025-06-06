@@ -8,22 +8,23 @@ public enum EnemyStates { GUARD, PATROL, CHASE, DEAD }
 
 [RequireComponent(typeof(NavMeshAgent))]
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IEndGameObserver
 {
     private EnemyStates enemyStates;
     private NavMeshAgent agent;
     private Animator anim;
+    private Collider coll;
     private CharacterStats characterStats;
 
     [Header("Basic Settings")]
     public float sightRadius; // 可视范围
-    public bool isGuard;
+    public bool isGuard;// 是否为守卫
     private float speed; //原有速度
     private GameObject attackTarget; // 攻击对象  
     public float lookAtTime;// 观察时间
     private float remainLookAtTime; //剩余的观察时间
     private float lastAttackTime; // 攻击冷却时间
-
+    private Quaternion guardRotation; // 原始旋转角度
 
     [Header("Patrol State")]
     public float patrolRange; // 巡逻范围
@@ -34,7 +35,8 @@ public class EnemyController : MonoBehaviour
     bool isWalk;
     bool isChase;
     bool isFollow;
-
+    bool isDead;
+    bool playerDead;
 
     /* ---------- Basic Function ---------- */
     void Awake()
@@ -42,8 +44,11 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         characterStats = GetComponent<CharacterStats>();
+        coll = GetComponent<Collider>();
+
         speed = agent.speed; // 获取原有速度
         guardPos = transform.position; // 记录守卫初始位置
+        guardRotation = transform.rotation; // 记录原始旋转角度
         remainLookAtTime = lookAtTime; // 初始化剩余观察时间
     }
 
@@ -58,13 +63,28 @@ public class EnemyController : MonoBehaviour
             enemyStates = EnemyStates.PATROL;
             GetNewWayPoint(); // 获取初始巡逻点
         }
-
     }
+
+    void OnEnable()//启用时调用
+    {
+        GameManager.Instance.AddObserver(this); // 注册观察者
+    }
+
+    void OnDisable()//销毁时调用
+    {
+        GameManager.Instance.RemoveObserver(this); // 注销观察者
+    }
+
     void Update()
     {
-        SwitchStates();
-        SwitchAnimation();
-        lastAttackTime -= Time.deltaTime; // 更新攻击冷却
+        isDead = characterStats.CurrentHealth <= 0;
+        // 更新状态
+        if (!playerDead)
+        {
+            SwitchStates();
+            SwitchAnimation();
+            lastAttackTime -= Time.deltaTime; // 更新攻击冷却
+        }
     }
 
     /* ---------------- --- ------------------- */
@@ -77,12 +97,17 @@ public class EnemyController : MonoBehaviour
         anim.SetBool("Chase", isChase);
         anim.SetBool("Follow", isFollow);
         anim.SetBool("Critical", characterStats.isCritical);
+        anim.SetBool("Death", isDead);
     }
 
     void SwitchStates()//切换Enemy状态
     {
+        //死亡，切换到DEAD状态
+        if (isDead)
+            enemyStates = EnemyStates.DEAD;
+
         //如果发现player，则切换到CHASE状态
-        if (FoundPlayer())
+        else if (FoundPlayer())
         {
             enemyStates = EnemyStates.CHASE;
             // Debug.Log("Player found.");
@@ -90,6 +115,19 @@ public class EnemyController : MonoBehaviour
         switch (enemyStates)
         {
             case EnemyStates.GUARD:
+                isChase = false;
+                //TODO:May error(for difference)
+                if (Vector3.Distance(transform.position, guardPos) <= agent.stoppingDistance)
+                {
+                    isWalk = false; // 如果在守卫位置，则设置为不行走状态
+                    transform.rotation = Quaternion.Lerp(transform.rotation, guardRotation, 0.01f); // 恢复原始旋转角度
+                }
+                else
+                {
+                    isWalk = true; // 如果不在守卫位置，则设置为行走状态
+                    agent.isStopped = false; // 恢复移动
+                    agent.destination = guardPos; // 返回守卫位置
+                }
                 break;
             case EnemyStates.PATROL:
                 isChase = false;
@@ -148,7 +186,7 @@ public class EnemyController : MonoBehaviour
                     if (lastAttackTime < 0)
                     {
                         lastAttackTime = characterStats.attackData.coolDown; // 重置攻击冷却时间
-                        //暴击判断
+                                                                             //暴击判断
                         characterStats.isCritical = Random.value < characterStats.attackData.criticalChance;
                         // 执行攻击
                         Attack();
@@ -156,7 +194,9 @@ public class EnemyController : MonoBehaviour
                 }
                 break;
             case EnemyStates.DEAD:
-                // Implement dead behavior
+                coll.enabled = false; // 禁用碰撞体
+                agent.enabled = false; // 停止NavMeshAgent
+                Destroy(gameObject, 2f); // 2秒后销毁敌人对象
                 break;
             default:
                 break;
@@ -236,5 +276,20 @@ public class EnemyController : MonoBehaviour
             var targetStats = attackTarget.GetComponent<CharacterStats>(); //获取目标的角色属性脚本
             targetStats.TakeDamage(characterStats, targetStats); //调用目标的TakeDamage方法，传入攻击者和防御者的角色属性脚本
         }
+    }
+
+    /* ---------- Interface ---------- */
+    public void EndNotify()
+    {
+        //获胜动画
+        //停止所有移动
+        //停止Agent
+        anim.SetBool("Win", true);//动画
+        playerDead = true; // 玩家死亡
+
+        isChase = false;
+        isWalk = false;
+        attackTarget = null;
+
     }
 }

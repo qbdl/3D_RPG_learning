@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private GameObject attackTarget; //记录传入的攻击目标对象
     private float lastAttackTime; //上次攻击时间(为了攻击有间隔)
 
+    bool isDead; //是否死亡
+
 
     /* ---------- Basic Function ---------- */
     void Awake()//在对象被加载时调用
@@ -25,10 +27,15 @@ public class PlayerController : MonoBehaviour
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
 
+        GameManager.Instance.RigisterPlayer(characterStats); //注册玩家角色属性到GameManager
     }
 
     void Update()
     {
+        isDead = characterStats.CurrentHealth <= 0;
+        if (isDead)//进行广播
+            GameManager.Instance.NotifyObservers(); //通知所有观察者
+
         SwitchAnimation(); //每帧更新动画状态
         lastAttackTime -= Time.deltaTime; // 攻击冷却时间的衰减
     }
@@ -38,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void SwitchAnimation()
     {
         anim.SetFloat("Speed", agent.velocity.sqrMagnitude); //设置前端的动画速度参数
+        anim.SetBool("Death", isDead); //设置死亡状态
     }
 
     public void MoveToTarget(Vector3 target)

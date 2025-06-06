@@ -44,6 +44,10 @@ public class CharacterStats : MonoBehaviour
         int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
+        if (attacker.isCritical)
+        {
+            defender.GetComponent<Animator>().SetTrigger("Hit"); //触发暴击动画
+        }
         //TODO:update血量UI,人物属性升级
     }
 
@@ -51,7 +55,7 @@ public class CharacterStats : MonoBehaviour
     {
         float coreDamage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
         //是否暴击
-        Debug.Log($"Core Damage: {coreDamage}, Critical: {isCritical}");
+        // Debug.Log($"Core Damage: {coreDamage}, Critical: {isCritical}");
         return (int)(coreDamage * (isCritical ? attackData.criticalMultiplier : 1));
     }
 
