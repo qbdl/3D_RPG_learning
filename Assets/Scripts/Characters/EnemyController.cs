@@ -283,6 +283,10 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             var targetStats = attackTarget.GetComponent<CharacterStats>(); //获取目标的角色属性脚本
             targetStats.TakeDamage(characterStats, targetStats); //调用目标的TakeDamage方法，传入攻击者和防御者的角色属性脚本
         }
+        else
+        {
+            Debug.Log("Hit not triggered: Target is not in range or not facing the target.");
+        }
     }
 
     /* ---------- Interface ---------- */

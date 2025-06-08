@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 5004925782146071620}
   - component: {fileID: 5004925782146071611}
   - component: {fileID: 5004925782146071610}
+  - component: {fileID: -8316276196416964605}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Enemy
@@ -95,6 +96,7 @@ Transform:
   m_Children:
   - {fileID: 5004925782768201064}
   - {fileID: 5004925781287799880}
+  - {fileID: 5662461947486698116}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -169.031, z: 0}
@@ -147,6 +149,8 @@ MonoBehaviour:
   lookAtTime: 3
   patrolRange: 0
   kickForce: 30
+  rockPrefab: {fileID: 0}
+  handPos: {fileID: 0}
 --- !u!114 &5004925782146071611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +189,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-8316276196416964605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004925781075663679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5595b2ea0f5a8d4caf34433183e58e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUIPrefab: {fileID: 6243164006102189823, guid: f599a99fcf2e4cd44bc24d968a28afac, type: 3}
+  barPoint: {fileID: 5662461947486698116}
+  alwaysVisible: 0
+  visibleTime: 3
 --- !u!1 &5004925781097523350
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,4 +865,34 @@ Transform:
   - {fileID: 5004925782506590621}
   m_Father: {fileID: 5004925781050118008}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6918778441736983585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5662461947486698116}
+  m_Layer: 0
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5662461947486698116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6918778441736983585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5004925781075663677}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

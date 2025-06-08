@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
+    public event Action<int, int> UpdateHealthBarOnAttack;// 攻击时更新血量条事件
+
     public CharacterData_SO templateData; // 角色模板数据脚本化对象
     public CharacterData_SO characterData; // 角色数据脚本化对象
     public AttackData_SO attackData;
@@ -65,13 +68,19 @@ public class CharacterStats : MonoBehaviour
         {
             defender.GetComponent<Animator>().SetTrigger("Hit"); //触发暴击动画
         }
-        //TODO:update血量UI,人物属性升级
+        //update血量UI
+        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
+
+
+        //TODO:人物属性升级
     }
 
     public void TakeDamage(int damage, CharacterStats defender)
     {
         int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
+        //update血量UI
+        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
     }
 
 
