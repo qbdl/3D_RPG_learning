@@ -65,22 +65,25 @@ public class CharacterStats : MonoBehaviour
         CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
 
         if (attacker.isCritical)
-        {
             defender.GetComponent<Animator>().SetTrigger("Hit"); //触发暴击动画
-        }
+
         //update血量UI
         UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
-
-
-        //TODO:人物属性升级
+        //人物属性升级
+        if (CurrentHealth <= 0)
+            attacker.characterData.UpdateExp(characterData.killPoint);// 更新击杀者经验值
     }
 
     public void TakeDamage(int damage, CharacterStats defender)
     {
         int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
+
         //update血量UI
         UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
+        //人物属性升级
+        if (CurrentHealth <= 0)
+            GameManager.Instance.playerStats.characterData.UpdateExp(characterData.killPoint);// 更新击杀者经验值
     }
 
 
