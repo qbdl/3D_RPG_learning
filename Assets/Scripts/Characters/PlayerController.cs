@@ -25,12 +25,21 @@ public class PlayerController : MonoBehaviour
         stopDistance = agent.stoppingDistance; //记录默认的停止距离
     }
 
-    void Start()//在对象启用后、第一次更新帧之前调用
+    void OnEnable()//在玩家在场景中被启用时调用
     {
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
-
+    }
+    void Start()//在对象启用后、第一次更新帧之前调用
+    {
         GameManager.Instance.RigisterPlayer(characterStats); //注册玩家角色属性到GameManager
+    }
+
+    void OnDisable()//在玩家被关闭时调用
+    {
+        if (!MouseManager.IsInitialized) return; //如果MouseManager未初始化
+        MouseManager.Instance.OnMouseClicked -= MoveToTarget; //取消注册鼠标点击事件
+        MouseManager.Instance.OnEnemyClicked -= EventAttack; //取消注册敌人点击事件
     }
 
     void Update()

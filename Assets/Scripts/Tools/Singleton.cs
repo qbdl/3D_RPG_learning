@@ -15,7 +15,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         if (instance == null)
         {
             instance = (T)this;
-            // DontDestroyOnLoad(gameObject); // 保持单例在场景切换时不被销毁
+            DontDestroyOnLoad(gameObject); // 保持单例在场景切换时不被销毁
         }
         else
             Destroy(gameObject); // 如果已经存在实例，则销毁新创建的实例

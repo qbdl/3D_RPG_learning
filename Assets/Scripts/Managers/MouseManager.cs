@@ -10,12 +10,6 @@ public class MouseManager : Singleton<MouseManager>
     public event Action<Vector3> OnMouseClicked;
     public event Action<GameObject> OnEnemyClicked;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        // DontDestroyOnLoad(gameObject); // 保持单例在场景切换时不被销毁
-    }
-
     void Update()//每次刷新
     {
         SetCursorTexture();//鼠标移动到时：换鼠标贴图

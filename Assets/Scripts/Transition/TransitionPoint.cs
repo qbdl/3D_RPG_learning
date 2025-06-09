@@ -18,16 +18,10 @@ public class TransitionPoint : MonoBehaviour
     {
         // if (canTrans)
         //     Debug.Log("Can Trans");
-
         if (Input.GetKeyDown(KeyCode.E) && canTrans)
         {
-            if (transitionType == TransitionType.SameScene)
-                SceneController.Instance.TransitionToDestination(this);
-            else if (transitionType == TransitionType.DifferentScene)
-            {
-                // 切换到不同的场景
-
-            }
+            // Debug.Log("Transitioning to destination: " + destinationTag);
+            SceneController.Instance.TransitionToDestination(this);
         }
     }
 
