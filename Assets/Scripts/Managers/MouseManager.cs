@@ -37,6 +37,9 @@ public class MouseManager : Singleton<MouseManager>
                 case "Enemy":
                     Cursor.SetCursor(attack, new Vector2(16, 16), CursorMode.Auto);
                     break;
+                case "Portal":
+                    Cursor.SetCursor(doorway, new Vector2(16, 16), CursorMode.Auto);
+                    break;
             }
         }
     }
@@ -48,10 +51,13 @@ public class MouseManager : Singleton<MouseManager>
         {
             if (hitInfo.collider.gameObject.CompareTag("Ground"))
                 OnMouseClicked?.Invoke(hitInfo.point); //触发事件
+            if (hitInfo.collider.gameObject.CompareTag("Portal")) //与Ground逻辑相同，要移动过去
+                OnMouseClicked?.Invoke(hitInfo.point);
             if (hitInfo.collider.gameObject.CompareTag("Enemy"))
                 OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
             if (hitInfo.collider.gameObject.CompareTag("Attackable")) //与攻击敌人的逻辑相同
                 OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
+
         }
     }
 }
