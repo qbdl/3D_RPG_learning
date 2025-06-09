@@ -122,7 +122,6 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         {
             case EnemyStates.GUARD:
                 isChase = false;
-                //TODO:May error(for difference)
                 if (Vector3.Distance(transform.position, guardPos) <= agent.stoppingDistance)
                 {
                     isWalk = false; // 如果在守卫位置，则设置为不行走状态

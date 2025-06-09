@@ -10,6 +10,7 @@ public class SceneController : Singleton<SceneController>
     GameObject player;// 玩家实例
     NavMeshAgent playerAgent;// 玩家Agent
 
+    // 用于在游戏中传送到指定场景或位置
     public void TransitionToDestination(TransitionPoint transitionPoint)
     {
         switch (transitionPoint.transitionType)
@@ -22,11 +23,44 @@ public class SceneController : Singleton<SceneController>
                 break;
         }
     }
+    // 获取传送目的地
+    private TransitionDestination GetDestination(TransitionDestination.DestinationTag destinationTag)
+    {
+        var entrances = FindObjectsOfType<TransitionDestination>();
+        foreach (var entrance in entrances)
+        {
+            if (entrance.destinationTag == destinationTag)
+                return entrance;
+        }
+        return null;
+    }
 
+    // 用于在游戏中退回到主场景
+    public void TransitionToMainMenu()
+    {
+        StartCoroutine(LoadMain());
+    }
+    // 用于在游戏进入时加载指定场景
+    public void TransitionToLoadGame()
+    {
+        StartCoroutine(LoadLevel(SaveManager.Instance.SceneName)); // 加载保存的场景
+    }
+    // 用于在游戏开始时加载第一个关卡
+    public void TransitionToFirstLevel()
+    {
+        // Debug.Log("Transitioning to first level...");
+        StartCoroutine(LoadLevel("SimpleNature")); // 加载第一个关卡SimpleNature
+    }
+
+    /* ------------- IEnumerator ------------- */
+
+    // 用于在游戏中传送到指定场景或位置
     IEnumerator Transition(string sceneName, TransitionDestination.DestinationTag destinationTag)
     {
 
-        //TODO:保存数据（如玩家状态、物品等）
+        //保存数据（如玩家状态、物品等）
+        SaveManager.Instance.SavePlayerData();
+
         // Debug.Log($"Starting transition to scene: {sceneName}, destinationTag: {destinationTag}");
 
         //检测当前场景与目标场景是否相同
@@ -38,6 +72,8 @@ public class SceneController : Singleton<SceneController>
 
             // Debug.Log("Instantiating player in new scene...");
             yield return Instantiate(playerPrefab, GetDestination(destinationTag).transform.position, GetDestination(destinationTag).transform.rotation);// 实例化玩家对象
+
+            SaveManager.Instance.LoadPlayerData(); // 加载玩家数据
 
             // Debug.Log($"Player instantiated");
             yield break;// 结束协程，避免后续代码执行
@@ -59,16 +95,24 @@ public class SceneController : Singleton<SceneController>
             yield return null;
         }
     }
-
-    // 获取传送目的地
-    private TransitionDestination GetDestination(TransitionDestination.DestinationTag destinationTag)
+    //用于在游戏进入时加载指定场景
+    IEnumerator LoadLevel(string sceneName)
     {
-        var entrances = FindObjectsOfType<TransitionDestination>();
-        foreach (var entrance in entrances)
+        // 异步加载新场景
+        if (sceneName != "")
         {
-            if (entrance.destinationTag == destinationTag)
-                return entrance;
+            yield return SceneManager.LoadSceneAsync(sceneName);
+            yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);// 实例化玩家对象
+
+            //保存游戏
+            SaveManager.Instance.SavePlayerData();
+            yield break;
         }
-        return null;
+    }
+    //用于在游戏中退回到主场景
+    IEnumerator LoadMain()
+    {
+        yield return SceneManager.LoadSceneAsync("SimpleNaturePack_For_MainUI"); // 异步加载主菜单场景
+        yield break;
     }
 }

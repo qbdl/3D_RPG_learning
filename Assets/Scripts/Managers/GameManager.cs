@@ -44,4 +44,14 @@ public class GameManager : Singleton<GameManager>
             observer.EndNotify();
         }
     }
+
+    public Transform GetEntrance()
+    {
+        foreach (var entrance in FindObjectsOfType<TransitionDestination>())
+        {
+            if (entrance.destinationTag == TransitionDestination.DestinationTag.ENTER) // 检查传送目的地标签是否为ENTER
+                return entrance.transform;
+        }
+        return null;
+    }
 }

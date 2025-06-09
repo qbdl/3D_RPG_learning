@@ -29,10 +29,11 @@ public class PlayerController : MonoBehaviour
     {
         MouseManager.Instance.OnMouseClicked += MoveToTarget;
         MouseManager.Instance.OnEnemyClicked += EventAttack;
+        GameManager.Instance.RigisterPlayer(characterStats); //注册玩家角色属性到GameManager 
     }
     void Start()//在对象启用后、第一次更新帧之前调用
     {
-        GameManager.Instance.RigisterPlayer(characterStats); //注册玩家角色属性到GameManager
+        SaveManager.Instance.LoadPlayerData(); //Player自己去加载数据
     }
 
     void OnDisable()//在玩家被关闭时调用
