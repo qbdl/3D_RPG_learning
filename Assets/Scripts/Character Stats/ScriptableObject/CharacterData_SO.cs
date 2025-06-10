@@ -45,6 +45,8 @@ public class CharacterData_SO : ScriptableObject
         maxHealth = (int)(maxHealth * LevelMultiplier); // 升级后最大生命值提升
         currentHealth = maxHealth; // 升级后当前生命值重置为最大生命值
 
+        //TODO:攻击以及防御值改变
+
         Debug.Log($"Level Up! New Level: {currentLevel}, Max Health: {maxHealth}, Base Exp: {baseExp}");
     }
 
