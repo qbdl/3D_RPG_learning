@@ -10,6 +10,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     public SceneFader sceneFaderPrefab; // 场景淡入淡出效果prefab
 
     bool fadeFinished; // 场景淡入淡出是否正在进行（防止重复进行）
+    private float fadeTime;// 场景淡入淡出时间
 
     GameObject player;// 玩家实例
     NavMeshAgent playerAgent;// 玩家Agent
@@ -18,6 +19,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     {
         GameManager.Instance.AddObserver(this); // 注册观察者
         fadeFinished = true;
+        fadeTime = 1.1f;
     }
 
 
@@ -85,14 +87,14 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
         if (SceneManager.GetActiveScene().name != sceneName)
         {
             SceneFader temp_fade = Instantiate(sceneFaderPrefab); // 实例化场景淡入淡出效果
-            yield return StartCoroutine(temp_fade.FadeOut(2.5f)); // 先淡出当前场景
+            yield return StartCoroutine(temp_fade.FadeOut(fadeTime)); // 先淡出当前场景
 
             // 异步加载新场景
             yield return SceneManager.LoadSceneAsync(sceneName); // yield return 表示 等待这段代码完成才运行这段代码之后的内容
             yield return Instantiate(playerPrefab, GetDestination(destinationTag).transform.position, GetDestination(destinationTag).transform.rotation);// 实例化玩家对象
             SaveManager.Instance.LoadPlayerData(); // 加载玩家数据
 
-            yield return StartCoroutine(temp_fade.FadeIn(2.5f)); // 再淡入新场景
+            yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
 
             yield break;// 结束协程，避免后续代码执行
         }
@@ -116,7 +118,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
         // 异步加载新场景
         if (sceneName != "")
         {
-            yield return StartCoroutine(temp_fade.FadeOut(2.5f)); // 先淡出当前场景
+            yield return StartCoroutine(temp_fade.FadeOut(fadeTime)); // 先淡出当前场景
 
             yield return SceneManager.LoadSceneAsync(sceneName);
             yield return player = Instantiate(playerPrefab, GameManager.Instance.GetEntrance().position, GameManager.Instance.GetEntrance().rotation);// 实例化玩家对象
@@ -124,7 +126,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
             //保存游戏
             SaveManager.Instance.SavePlayerData();
 
-            yield return StartCoroutine(temp_fade.FadeIn(2.5f)); // 再淡入新场景
+            yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
 
             yield break;
         }
@@ -133,9 +135,9 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     IEnumerator LoadMain()
     {
         SceneFader temp_fade = Instantiate(sceneFaderPrefab); // 实例化场景淡入淡出效果
-        yield return StartCoroutine(temp_fade.FadeOut(2.5f)); // 先淡出当前场景
+        yield return StartCoroutine(temp_fade.FadeOut(fadeTime)); // 先淡出当前场景
         yield return SceneManager.LoadSceneAsync("SimpleNaturePack_For_MainUI"); // 异步加载主菜单场景
-        yield return StartCoroutine(temp_fade.FadeIn(2.5f)); // 再淡入新场景
+        yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
         yield break;
     }
 }
