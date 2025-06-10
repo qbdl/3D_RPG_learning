@@ -21,10 +21,6 @@ public class GameManager : Singleton<GameManager>
             followCamera.Follow = playerStats.transform.GetChild(2); // 摄像机跟随玩家的LookAtPoint
             followCamera.LookAt = playerStats.transform.GetChild(2); // 摄像机注视玩家的LookAtPoint
         }
-        else
-        {
-            Debug.LogError("qbdl CinemachineFreeLook component not found in the scene!");
-        }
     }
 
     public void AddObserver(IEndGameObserver observer)

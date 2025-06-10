@@ -284,7 +284,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
         else
         {
-            Debug.Log("Hit not triggered: Target is not in range or not facing the target.");
+            // Debug.Log("Hit not triggered: Target is not in range or not facing the target.");
         }
     }
 

@@ -36,6 +36,8 @@ public class CharacterData_SO : ScriptableObject
 
     private void LevelUp()
     {
+        if (currentLevel == 0) return;  // 确保人物死后不再意外变为0级
+
         //所有提升的数据方法
         currentLevel = Mathf.Clamp(currentLevel + 1, 0, maxLevel); // 确保当前等级不超过最大等级
         baseExp += (int)(baseExp * LevelMultiplier); // 下一阶段升级需要的经验值
