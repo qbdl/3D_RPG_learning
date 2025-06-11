@@ -1,16 +1,24 @@
-# 3D_RPG_learning
+# Doggy Knight ![redis](https://img.shields.io/badge/qbdl-Doggy%20Knight-blueviolet?logo=Github)
 
-完成一个RPG游戏.
-
-
-
-学习视频：[3D RPG Course | Core 核心功能 | Unity 中文课堂](https://learn.u3d.cn/tutorial/3drpg-core)、[Unity2020 3DRPG游戏开发教程|Core核心功能01:Create Project 创建项目导入素材](https://www.bilibili.com/video/BV1rf4y1k7vE/)
-
-参考资料：[GitHub - SaberArtoriaFan/UnityEditorWindowDIY](https://github.com/SaberArtoriaFan/UnityEditorWindowDIY)
+完成自己的第一个3D RPG游戏——“Doggy Knight”.
 
 
 
-Unity版本：2020.2.0f1c1（同视频里的版本）
+## 🌠基础说明
+
+**学习&参考视频**：
+
+- [3D RPG Course | Core 核心功能 | Unity 中文课堂](https://learn.u3d.cn/tutorial/3drpg-core)
+- [Unity2020 3DRPG游戏开发教程](https://www.bilibili.com/video/BV1rf4y1k7vE/)
+- [3D RPG Course ｜背包 & 对话 & 任务 高级教程 | Unity 中文课堂](https://learn.u3d.cn/tutorial/3drpg-advanced)
+
+
+
+**优化编辑器 参考网址**：[GitHub - SaberArtoriaFan/UnityEditorWindowDIY](https://github.com/SaberArtoriaFan/UnityEditorWindowDIY)
+
+
+
+**Unity版本**：2020.2.0f1c1（同视频里的版本）
 
 
 

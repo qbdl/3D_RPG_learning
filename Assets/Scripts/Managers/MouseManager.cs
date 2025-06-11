@@ -34,6 +34,9 @@ public class MouseManager : Singleton<MouseManager>
                 case "Portal":
                     Cursor.SetCursor(doorway, new Vector2(16, 16), CursorMode.Auto);
                     break;
+                case "Item":
+                    Cursor.SetCursor(point, new Vector2(16, 16), CursorMode.Auto);
+                    break;
                 default:
                     Cursor.SetCursor(arrow, new Vector2(16, 16), CursorMode.Auto);
                     break;
@@ -50,6 +53,9 @@ public class MouseManager : Singleton<MouseManager>
                 OnMouseClicked?.Invoke(hitInfo.point); //触发事件
             if (hitInfo.collider.gameObject.CompareTag("Portal")) //与Ground逻辑相同，要移动过去
                 OnMouseClicked?.Invoke(hitInfo.point);
+            if (hitInfo.collider.gameObject.CompareTag("Item")) //与Ground逻辑相同，要移动过去
+                OnMouseClicked?.Invoke(hitInfo.point);
+
             if (hitInfo.collider.gameObject.CompareTag("Enemy"))
                 OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
             if (hitInfo.collider.gameObject.CompareTag("Attackable")) //与攻击敌人的逻辑相同
