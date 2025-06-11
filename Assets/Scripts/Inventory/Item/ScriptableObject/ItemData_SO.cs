@@ -18,5 +18,6 @@ public class ItemData_SO : ScriptableObject
 
     [Header("Weapon")]
     public GameObject weaponPrefab; //武器prefab
+    public AttackData_SO weaponData; //武器攻击数据
 
 }

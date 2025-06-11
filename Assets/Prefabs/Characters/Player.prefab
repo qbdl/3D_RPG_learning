@@ -1744,7 +1744,7 @@ NavMeshAgent:
   m_Acceleration: 80
   avoidancePriority: 50
   m_AngularSpeed: 800
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1809,6 +1809,7 @@ MonoBehaviour:
   templateData: {fileID: 11400000, guid: 9a652bab3927d204b8dd150c63ca84ec, type: 2}
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 0eaae76df3057a24a95ac342848a99f8, type: 2}
+  weaponSlot: {fileID: 3705491164806705892}
   isCritical: 0
 --- !u!1 &3705491164806344502
 GameObject:

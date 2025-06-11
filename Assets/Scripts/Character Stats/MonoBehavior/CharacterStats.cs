@@ -7,9 +7,12 @@ public class CharacterStats : MonoBehaviour
 {
     public event Action<int, int> UpdateHealthBarOnAttack;// 攻击时更新血量条事件
 
-    public CharacterData_SO templateData; // 角色模板数据脚本化对象
-    public CharacterData_SO characterData; // 角色数据脚本化对象
-    public AttackData_SO attackData;
+    public CharacterData_SO templateData; // 角色模板数据
+    public CharacterData_SO characterData; // 角色数据
+    public AttackData_SO attackData; // 攻击数据
+
+    [Header("Weapon")]
+    public Transform weaponSlot;// 武器位置（用于对应的装上武器） 
 
     [HideInInspector]
     public bool isCritical;
@@ -20,15 +23,6 @@ public class CharacterStats : MonoBehaviour
         {
             characterData = Instantiate(templateData); // 克隆模板数据
         }
-        // else
-        // {
-        //     Debug.LogError("Template data is not assigned in CharacterStats.");
-        // }
-
-        // if (attackData == null)
-        // {
-        //     Debug.LogError("Attack data is not assigned in CharacterStats.");
-        // }
     }
 
     #region Read from Data_SO
@@ -95,5 +89,18 @@ public class CharacterStats : MonoBehaviour
         return (int)(coreDamage * (isCritical ? attackData.criticalMultiplier : 1));
     }
 
+    #endregion
+
+    #region Equip Weapon
+    public void EquipWeapon(ItemData_SO weapon)
+    {
+        // 将weapon prefab生成到 weaponSlot位置
+        if (weapon.weaponPrefab != null)
+            Instantiate(weapon.weaponPrefab, weaponSlot);
+
+        //装备武器后更新属性
+        attackData.ApplyWeaponData(weapon.weaponData);
+
+    }
     #endregion
 }

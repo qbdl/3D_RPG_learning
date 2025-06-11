@@ -20,6 +20,8 @@
 
 **Unity版本**：2020.2.0f1c1（同视频里的版本）
 
+**Unity脚本手册**：[Unity 脚本 API](https://docs.unity.cn/cn/2020.2/ScriptReference/RectTransformUtility.html)
+
 
 
 ✨ 过程学习记录见`learning_record/学习过程记录.md`，git记录 参考视频采用增量开发的方法，也希望能帮助使用本仓库的你~。

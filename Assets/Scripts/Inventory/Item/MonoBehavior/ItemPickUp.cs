@@ -9,10 +9,11 @@ public class ItemPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //TODO:将物品添加到背包
-
-
+            //将物品添加到背包
+            InventoryManager.Instance.inventoryData.AddItem(itemData, itemData.itemAmount);
             //装备武器
+            // GameManager.Instance.playerStats.EquipWeapon(itemData);
+
             Destroy(gameObject); //销毁物品
         }
     }
