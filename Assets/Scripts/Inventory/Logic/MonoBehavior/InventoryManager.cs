@@ -8,4 +8,12 @@ public class InventoryManager : Singleton<InventoryManager>
     [Header("Inventory Data")]
     public InventoryData_SO inventoryData; // 背包数据
 
+    [Header("Containers")]
+    public ContainerUI inventoryUI; // 背包UI
+
+    void Start()
+    {
+        inventoryUI.RefreshUI(); // 初始化背包UI
+    }
+
 }
