@@ -19,10 +19,23 @@ public class SlotHolder : MonoBehaviour
                 itemUI.Bag = InventoryManager.Instance.inventoryData; //设置其中Bag指向对应的背包数据库
                 break;
             case SlotType.WEAPON:
+                itemUI.Bag = InventoryManager.Instance.equipmentData; //设置其中Bag指向对应的装备数据库
+                //装备武器 切换武器
+                if (itemUI.Bag.items[itemUI.Index].itemData != null)
+                    GameManager.Instance.playerStats.ChangeWeapon(itemUI.Bag.items[itemUI.Index].itemData);
+                else
+                    GameManager.Instance.playerStats.UnEquipWeapon();//耐久度问题(降为0则卸下武器)
                 break;
             case SlotType.ARMOR:
+                itemUI.Bag = InventoryManager.Instance.equipmentData; //设置其中Bag指向对应的装备数据库
+                //装备盔甲 切换盔甲
+                if (itemUI.Bag.items[itemUI.Index].itemData != null)
+                    GameManager.Instance.playerStats.ChangeArmor(itemUI.Bag.items[itemUI.Index].itemData);
+                else
+                    GameManager.Instance.playerStats.UnEquipArmor(); //耐久度问题(降为0则卸下盔甲)
                 break;
             case SlotType.ACTION:
+                itemUI.Bag = InventoryManager.Instance.actionData; //设置其中Bag指向对应的快捷栏数据库
                 break;
         }
 

@@ -11,7 +11,7 @@ public class ItemUI : MonoBehaviour
     public InventoryData_SO Bag { get; set; }//对应的背包数据库
     public int Index { get; set; } = -1;//对应背包数据库里的索引
 
-    /// 设置格子里的物品UI
+    // 设置格子里的物品UI
     public void SetupItemUI(ItemData_SO item, int itemAmount)
     {
         if (item != null)

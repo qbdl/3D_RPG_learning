@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class MouseManager : Singleton<MouseManager>
 {
@@ -13,7 +14,8 @@ public class MouseManager : Singleton<MouseManager>
     void Update()//每次刷新
     {
         SetCursorTexture();//鼠标移动到时：换鼠标贴图
-        MouseControl();//鼠标点击时：触发事件
+        if (!InteractWithUI())
+            MouseControl();//鼠标点击时：触发事件
     }
 
     void SetCursorTexture()
@@ -62,5 +64,12 @@ public class MouseManager : Singleton<MouseManager>
                 OnEnemyClicked?.Invoke(hitInfo.collider.gameObject);
 
         }
+    }
+
+    bool InteractWithUI()
+    {
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+            return true; //如果鼠标指针悬停在UI上，返回true
+        return false;
     }
 }

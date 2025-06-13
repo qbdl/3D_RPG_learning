@@ -1810,6 +1810,7 @@ MonoBehaviour:
   characterData: {fileID: 0}
   attackData: {fileID: 11400000, guid: 0eaae76df3057a24a95ac342848a99f8, type: 2}
   weaponSlot: {fileID: 3705491164806705892}
+  armorSlot: {fileID: 3705491164806705930}
   isCritical: 0
 --- !u!1 &3705491164806344502
 GameObject:

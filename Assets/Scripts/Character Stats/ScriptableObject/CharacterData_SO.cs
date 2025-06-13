@@ -43,9 +43,11 @@ public class CharacterData_SO : ScriptableObject
         baseExp += (int)(baseExp * LevelMultiplier); // 下一阶段升级需要的经验值
 
         maxHealth = (int)(maxHealth * LevelMultiplier); // 升级后最大生命值提升
-        currentHealth = maxHealth; // 升级后当前生命值重置为最大生命值
+        currentHealth = maxHealth;
+        baseDefence = (int)(baseDefence * LevelMultiplier); // 升级后基础防御值提升 
+        currentDefence = baseDefence;
 
-        //TODO:攻击以及防御值改变
+        //TODO:攻击值改变
 
         Debug.Log($"Level Up! New Level: {currentLevel}, Max Health: {maxHealth}, Base Exp: {baseExp}");
     }
