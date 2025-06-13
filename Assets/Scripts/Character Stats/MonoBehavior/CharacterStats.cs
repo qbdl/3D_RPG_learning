@@ -171,4 +171,12 @@ public class CharacterStats : MonoBehaviour
         //TODO:切换动画
     }
     #endregion
+
+    #region Apply Data Change
+    public void ApplyUseableEffect(int healthPoint, int defencePoint)
+    {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + healthPoint, 0, MaxHealth);//amount有可能是负数
+        CurrentDefence = Mathf.Max(CurrentDefence + defencePoint, 0); //防御不能为负数
+    }
+    #endregion
 }

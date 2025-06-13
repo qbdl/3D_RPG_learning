@@ -14,6 +14,15 @@ public class ItemUI : MonoBehaviour
     // 设置格子里的物品UI
     public void SetupItemUI(ItemData_SO item, int itemAmount)
     {
+        //物品数量小于等于0，则不显示物品图标和数量
+        if (itemAmount <= 0)
+        {
+            Bag.items[Index].itemData = null;
+            icon.gameObject.SetActive(false);//关闭icon（含text）这个部分
+            return;
+        }
+
+        //物品数量大于0
         if (item != null)
         {
             icon.sprite = item.itemIcon;
@@ -23,5 +32,11 @@ public class ItemUI : MonoBehaviour
         }
         else
             icon.gameObject.SetActive(false);//关闭icon（含text）这个部分
+    }
+
+    // 获取当前格子UI对应里面的物品数据
+    public ItemData_SO GetItemData()
+    {
+        return Bag.items[Index].itemData; //返回对应格子里的物品数据
     }
 }

@@ -16,6 +16,9 @@ public class ItemData_SO : ScriptableObject
     public string itemDescription = ""; //物品描述
     public bool itemStackable; //物品是否可堆叠
 
+    [Header("Useable Item")]
+    public UseableItemData_SO useableItemData; //可使用物品数据
+
     [Header("Weapon & Armor")]
     public GameObject weaponPrefab; //武器prefab
     public AttackData_SO weaponData; //武器攻击数据
