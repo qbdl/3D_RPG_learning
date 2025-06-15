@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a969541014ef84db9e90a9e681420a, type: 3}
   m_Name: Sword Data
   m_EditorClassIdentifier: 
-  attackRange: 2.4
+  attackRange: 2.6
   skillRange: 0
-  coolDown: 1
-  minDamage: 5
-  maxDamage: 8
+  coolDown: 1.1
+  minDamage: 6
+  maxDamage: 9
   criticalMultiplier: 2
   criticalChance: 0.2

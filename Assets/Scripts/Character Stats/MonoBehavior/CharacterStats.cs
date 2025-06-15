@@ -108,8 +108,10 @@ public class CharacterStats : MonoBehaviour
     public void EquipWeapon(ItemData_SO weapon)
     {
         // 将weapon prefab生成到 weaponSlot位置
-        if (weapon.weaponPrefab != null)
+        if (weapon.weaponPrefab != null && weapon.itemType == ItemType.Weapon)
             Instantiate(weapon.weaponPrefab, weaponSlot);
+        else
+            Debug.LogError($"EquipWeapon: weapon prefab is null or item type is not Weapon for weapon {weapon.name}");
 
         //装备武器后更新属性
         attackData.ApplyWeaponData(weapon.weaponData);
@@ -132,29 +134,31 @@ public class CharacterStats : MonoBehaviour
 
     public void EquipArmor(ItemData_SO armor)
     {
-        if (armor == null)
-        {
-            Debug.LogError("EquipArmor: armor is null!");
-            return;
-        }
-        if (armor.itemType != ItemType.Armor)
-        {
-            Debug.LogError("EquipArmor: The item is not an armor!");
-            return;
-        }
-        if (armor.armorPrefab == null)
-        {
-            Debug.LogError($"EquipArmor: armor prefab is null for armor {armor.name}");
-            return;
-        }
-
+        // if (armor == null)
+        // {
+        //     Debug.LogError("EquipArmor: armor is null!");
+        //     return;
+        // }
+        // if (armor.itemType != ItemType.Armor)
+        // {
+        //     Debug.LogError("EquipArmor: The item is not an armor!");
+        //     return;
+        // }
+        // if (armor.armorPrefab == null)
+        // {
+        //     Debug.LogError($"EquipArmor: armor prefab is null for armor {armor.name}");
+        //     return;
+        // }
 
         // 将armor prefab生成到 armorSlot位置
-        if (armor.armorPrefab != null)
+        if (armor.armorPrefab != null && armor.itemType == ItemType.Armor)
             Instantiate(armor.armorPrefab, armorSlot);
+        else
+            Debug.LogError($"EquipArmor: armor prefab is null or item type is not Armor for armor {armor.name}");
 
         // 装备盔甲后更新属性
         characterData.baseDefence = armor.armorData.baseDefence;
+        characterData.currentDefence = armor.armorData.currentDefence;
         //TODO:切换动画
     }
     public void UnEquipArmor()
@@ -168,6 +172,7 @@ public class CharacterStats : MonoBehaviour
 
         // 卸下盔甲后更新属性
         characterData.baseDefence = templateData.baseDefence; // 重置为模板数据的基础防御
+        characterData.currentDefence = templateData.currentDefence; // 重置为模板数据的当前防御
         //TODO:切换动画
     }
     #endregion

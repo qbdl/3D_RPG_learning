@@ -19,14 +19,17 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler
     }
     public void UseItem()
     {
-        if (itemUI.GetItemData().itemType == ItemType.Useable && itemUI.Bag.items[itemUI.Index].itemAmount > 0)//防止连续点击时小于0
+        if (itemUI.GetItemData() != null)
         {
-            //使用物品
-            int healthPoint = itemUI.GetItemData().useableItemData.healthPoint; //获取使用物品回复的生命值
-            int defencePoint = itemUI.GetItemData().useableItemData.defencePoint; //获取使用物品增加的防御点
-            GameManager.Instance.playerStats.ApplyUseableEffect(healthPoint, defencePoint); //应用使用物品的效果
+            if (itemUI.GetItemData().itemType == ItemType.Useable && itemUI.Bag.items[itemUI.Index].itemAmount > 0)//防止连续点击时小于0
+            {
+                //使用物品
+                int healthPoint = itemUI.GetItemData().useableItemData.healthPoint; //获取使用物品回复的生命值
+                int defencePoint = itemUI.GetItemData().useableItemData.defencePoint; //获取使用物品增加的防御点
+                GameManager.Instance.playerStats.ApplyUseableEffect(healthPoint, defencePoint); //应用使用物品的效果
 
-            itemUI.Bag.items[itemUI.Index].itemAmount--; //减少物品数量
+                itemUI.Bag.items[itemUI.Index].itemAmount--; //减少物品数量
+            }
         }
         UpdateItem(); //更新物品UI显示
     }

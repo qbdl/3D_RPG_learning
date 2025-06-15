@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
@@ -25,6 +26,15 @@ public class InventoryManager : Singleton<InventoryManager>
     public Canvas dragCanvas; // 拖拽物品时使用的canvas
     public DragData currentDrag;// 当前拖拽的DragData
 
+    [Header("UI Panel")]
+    public GameObject inventoryPanel; // 背包栏UI面板
+    public GameObject statsPanel; // 装备栏(人物栏)UI面板
+    bool isOpen = false;// 背包栏与装备栏是否打开
+
+    [Header("Stats Text")]
+    public Text healthText; // 生命值文本
+    public Text attackText; // 攻击力文本
+    public Text defenceText; // 防御值文本
 
     void Start()
     {
@@ -33,6 +43,36 @@ public class InventoryManager : Singleton<InventoryManager>
         actionUI.RefreshUI(); // 初始化快捷栏UI
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B)) // 按下B键打开或关闭背包栏
+        {
+            isOpen = !isOpen;
+            inventoryPanel.SetActive(isOpen); // 切换背包栏UI面板的显示状态
+            statsPanel.SetActive(isOpen); // 切换装备栏UI面板的显示状态
+        }
+
+        // 更新角色人物栏属性文本
+        UpdateStatsText(
+            GameManager.Instance.playerStats.CurrentHealth,
+            GameManager.Instance.playerStats.attackData.minDamage,
+            GameManager.Instance.playerStats.attackData.maxDamage,
+            GameManager.Instance.playerStats.CurrentDefence
+        );
+    }
+
+    // 更新角色人物栏属性文本
+    public void UpdateStatsText(int health, int attack_min, int attack_max, int defence)
+    {
+        // 更新生命值文本
+        healthText.text = health.ToString();
+        // 更新攻击力文本
+        attackText.text = attack_min + " - " + attack_max;
+        // 更新防御值文本
+        defenceText.text = defence.ToString();
+    }
+
+
     #region 检查拖拽物品是否在每一个Slot范围内
     //背包栏
     public bool CheckInInventoryUI(Vector3 position)
@@ -40,7 +80,7 @@ public class InventoryManager : Singleton<InventoryManager>
         for (int i = 0; i < inventoryUI.slotHolders.Length; i++)
         {
             RectTransform t = (RectTransform)inventoryUI.slotHolders[i].transform;//获取每个SlotHolder的RectTransform
-            //检查鼠标位置是否在当前SlotHolder的范围内
+                                                                                  //检查鼠标位置是否在当前SlotHolder的范围内
             if (RectTransformUtility.RectangleContainsScreenPoint(t, position))
                 return true; //如果在范围内，返回true
         }
@@ -52,7 +92,7 @@ public class InventoryManager : Singleton<InventoryManager>
         for (int i = 0; i < equipmentUI.slotHolders.Length; i++)
         {
             RectTransform t = (RectTransform)equipmentUI.slotHolders[i].transform;//获取每个SlotHolder的RectTransform
-            //检查鼠标位置是否在当前SlotHolder的范围内
+                                                                                  //检查鼠标位置是否在当前SlotHolder的范围内
             if (RectTransformUtility.RectangleContainsScreenPoint(t, position))
                 return true; //如果在范围内，返回true
         }
@@ -64,7 +104,7 @@ public class InventoryManager : Singleton<InventoryManager>
         for (int i = 0; i < actionUI.slotHolders.Length; i++)
         {
             RectTransform t = (RectTransform)actionUI.slotHolders[i].transform;//获取每个SlotHolder的RectTransform
-            //检查鼠标位置是否在当前SlotHolder的范围内
+                                                                               //检查鼠标位置是否在当前SlotHolder的范围内
             if (RectTransformUtility.RectangleContainsScreenPoint(t, position))
                 return true; //如果在范围内，返回true
         }
