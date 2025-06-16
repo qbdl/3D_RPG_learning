@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 354395365963922686}
   - component: {fileID: 7423720169236446642}
   - component: {fileID: -8454436888490750286}
+  - component: {fileID: 8897290380412256612}
   m_Layer: 6
   m_Name: SlimePolyart
   m_TagString: Enemy
@@ -546,6 +547,23 @@ MonoBehaviour:
   weaponSlot: {fileID: 0}
   armorSlot: {fileID: 0}
   isCritical: 0
+--- !u!114 &8897290380412256612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7470909389791698264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6815874bea58b479f9ffdb666396db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - item: {fileID: 7163811025522864400, guid: aae5ec5738de3cb469ab63a9e9a58af3, type: 3}
+    weight: 0.8
+  - item: {fileID: 972364762007065460, guid: d2ba5b5ef13cf324686c80aeb40494f6, type: 3}
+    weight: 0.5
 --- !u!1 &8834121787806587194
 GameObject:
   m_ObjectHideFlags: 0

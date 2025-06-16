@@ -11,10 +11,12 @@ public class InventoryManager : Singleton<InventoryManager>
         public RectTransform originalParent; // 原始的parent
     }
 
-    //TODO:最后添加模板用于保存数据
     [Header("Inventory Data")]
+    public InventoryData_SO templateInventoryData; // 背包的模板数据
     public InventoryData_SO inventoryData; // 背包的数据库
+    public InventoryData_SO templateEquipmentData; // 装备的模板数据
     public InventoryData_SO equipmentData; // 装备的数据库
+    public InventoryData_SO templateActionData; // 快捷栏的模板数据
     public InventoryData_SO actionData;// 快捷栏的数据库
 
     [Header("Containers")]
@@ -36,8 +38,25 @@ public class InventoryManager : Singleton<InventoryManager>
     public Text attackText; // 攻击力文本
     public Text defenceText; // 防御值文本
 
+    [Header("Tooltip")]
+    public ItemTooltip tooltip; // 物品提示UI
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if (templateInventoryData != null)
+            inventoryData = Instantiate(templateInventoryData); // 克隆背包模板数据
+        if (templateEquipmentData != null)
+            equipmentData = Instantiate(templateEquipmentData); // 克隆装备模板数据
+        if (templateActionData != null)
+            actionData = Instantiate(templateActionData); // 克隆快捷栏模板数据
+    }
+
     void Start()
     {
+        LoadData(); // 加载背包等数据
+
         inventoryUI.RefreshUI(); // 初始化背包UI
         equipmentUI.RefreshUI(); // 初始化装备UI
         actionUI.RefreshUI(); // 初始化快捷栏UI
@@ -59,6 +78,22 @@ public class InventoryManager : Singleton<InventoryManager>
             GameManager.Instance.playerStats.attackData.maxDamage,
             GameManager.Instance.playerStats.CurrentDefence
         );
+    }
+
+    //保存背包等数据
+    public void SaveData()
+    {
+        SaveManager.Instance.Save(inventoryData, inventoryData.name);
+        SaveManager.Instance.Save(equipmentData, equipmentData.name);
+        SaveManager.Instance.Save(actionData, actionData.name);
+    }
+
+    //加载背包等数据
+    public void LoadData()
+    {
+        SaveManager.Instance.Load(inventoryData, inventoryData.name);
+        SaveManager.Instance.Load(equipmentData, equipmentData.name);
+        SaveManager.Instance.Load(actionData, actionData.name);
     }
 
     // 更新角色人物栏属性文本

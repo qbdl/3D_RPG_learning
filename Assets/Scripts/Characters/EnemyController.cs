@@ -39,7 +39,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     bool isDead;
     bool playerDead;
 
-    /* ---------- Basic Function ---------- */
+    #region Basic
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -79,6 +79,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         if (!GameManager.IsInitialized) return; // 如果GameManager未初始化，则不执行注销操作
 
         GameManager.Instance.RemoveObserver(this); // 注销观察者
+
+        if (GetComponent<LootSpawner>() && isDead)
+            GetComponent<LootSpawner>().Spawnloot(); // 如果有LootSpawner组件且敌人已死亡，则生成掉落物品
     }
 
     void Update()
@@ -93,9 +96,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         }
     }
 
-    /* ---------------- --- ------------------- */
+    #endregion
 
-
+    #region Logic
     void SwitchAnimation()//切换动画
     {
         //用后端数值设置到前端的变量 来控制动画切换
@@ -249,8 +252,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             return Vector3.Distance(attackTarget.transform.position, transform.position) <= characterStats.attackData.skillRange;
         return false;
     }
+    #endregion
 
-    /* ---------- utils ---------- */
+    #region utils
     void GetNewWayPoint()// 获取一个新的巡逻点
     {
         remainLookAtTime = lookAtTime; // 每次新巡逻点生成时，重置观察时间
@@ -273,8 +277,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
     //     Gizmos.color = Color.blue;
     //     Gizmos.DrawWireSphere(transform.position, sightRadius);
     // }
+    #endregion
 
-    /* ---------- Animation Event ---------- */
+    #region Animation Event
     void Hit()
     {
         if (attackTarget != null && transform.IsFacingTarget(attackTarget.transform))//攻击的时候敌人仍在攻击范围 & 面向目标
@@ -287,8 +292,9 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             // Debug.Log("Hit not triggered: Target is not in range or not facing the target.");
         }
     }
+    #endregion
 
-    /* ---------- Interface ---------- */
+    #region Interface
     public void EndNotify()
     {
         //获胜动画
@@ -300,6 +306,6 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         isChase = false;
         isWalk = false;
         attackTarget = null;
-
     }
+    #endregion
 }

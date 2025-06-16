@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public enum SlotType { BAG, WEAPON, ARMOR, ACTION }
 //背包栏格子，武器栏格子，盔甲栏格子，动作栏格子
 
-public class SlotHolder : MonoBehaviour, IPointerClickHandler
+public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public SlotType slotType; //格子类型
     public ItemUI itemUI; // slotHolder(格子)上对应的ItemUI
@@ -17,6 +17,28 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler
         if (eventData.clickCount % 2 == 0)
             UseItem(); //双击使用物品
     }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //悬停进入
+        if (itemUI.GetItemData() != null)
+        {
+            //显示物品提示
+            InventoryManager.Instance.tooltip.SetupTooltip(itemUI.GetItemData());
+            InventoryManager.Instance.tooltip.gameObject.SetActive(true);
+        }
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //悬停退出
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false); //隐藏物品提示
+    }
+
+    void OnDisable()
+    {
+        //禁用时隐藏物品提示
+        InventoryManager.Instance.tooltip.gameObject.SetActive(false);
+    }
+
     public void UseItem()
     {
         if (itemUI.GetItemData() != null)

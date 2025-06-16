@@ -15,6 +15,12 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     GameObject player;// 玩家实例
     NavMeshAgent playerAgent;// 玩家Agent
 
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(gameObject); // 确保SceneController在场景切换时不会被销毁
+    }
+
     void Start()
     {
         GameManager.Instance.AddObserver(this); // 注册观察者
@@ -81,7 +87,9 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     {
 
         //保存数据（如玩家状态、物品等）
-        SaveManager.Instance.SavePlayerData();
+        SaveManager.Instance.SavePlayerData(); // 保存玩家数据
+        InventoryManager.Instance.SaveData(); // 保存背包等数据
+
 
         //检测当前场景与目标场景是否相同
         if (SceneManager.GetActiveScene().name != sceneName)
@@ -93,6 +101,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
             yield return SceneManager.LoadSceneAsync(sceneName); // yield return 表示 等待这段代码完成才运行这段代码之后的内容
             yield return Instantiate(playerPrefab, GetDestination(destinationTag).transform.position, GetDestination(destinationTag).transform.rotation);// 实例化玩家对象
             SaveManager.Instance.LoadPlayerData(); // 加载玩家数据
+            InventoryManager.Instance.LoadData(); // TODO:这是我自己加上的：加载背包等数据
 
             yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
 
@@ -125,6 +134,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
 
             //保存游戏
             SaveManager.Instance.SavePlayerData();
+            InventoryManager.Instance.SaveData();
 
             yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
 

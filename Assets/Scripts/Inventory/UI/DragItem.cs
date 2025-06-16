@@ -63,30 +63,33 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     return;
                 }
 
-                switch (targetSlotHolder.slotType)
+                //当目标槽位与当前槽位不相同时，才进行交换
+                if (targetSlotHolder != InventoryManager.Instance.currentDrag.originSlotHolder)
                 {
-                    case SlotType.BAG:
-                        // 检查目标槽位是否已有物品
-                        var targetItem = targetSlotHolder.itemUI.Bag.items[targetSlotHolder.itemUI.Index];
-                        bool canSwap = targetItem.itemData == null || //目标槽位为空
-                                       targetItem.itemData.itemType == currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType;//目标槽位与当前槽位物品类型相同
-                        if (canSwap)
-                            SwapItem();
-                        break;
-                    case SlotType.WEAPON:
-                        if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Weapon)
-                            SwapItem();
-                        break;
-                    case SlotType.ARMOR:
-                        if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Armor)
-                            SwapItem();
-                        break;
-                    case SlotType.ACTION:
-                        if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Useable)
-                            SwapItem();
-                        break;
+                    switch (targetSlotHolder.slotType)
+                    {
+                        case SlotType.BAG:
+                            // 检查目标槽位是否已有物品
+                            var targetItem = targetSlotHolder.itemUI.Bag.items[targetSlotHolder.itemUI.Index];
+                            bool canSwap = targetItem.itemData == null || //目标槽位为空
+                                           targetItem.itemData.itemType == currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType;//目标槽位与当前槽位物品类型相同
+                            if (canSwap)
+                                SwapItem();
+                            break;
+                        case SlotType.WEAPON:
+                            if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Weapon)
+                                SwapItem();
+                            break;
+                        case SlotType.ARMOR:
+                            if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Armor)
+                                SwapItem();
+                            break;
+                        case SlotType.ACTION:
+                            if (currentItemUI.Bag.items[currentItemUI.Index].itemData.itemType == ItemType.Useable)
+                                SwapItem();
+                            break;
+                    }
                 }
-
                 currentSlotHolder.UpdateItem(); //更新当前SlotHolder的UI
                 targetSlotHolder.UpdateItem(); //更新目标SlotHolder的UI
             }

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8533394356524287631}
   - component: {fileID: 8533394356524287630}
   - component: {fileID: -2912107320549549464}
+  - component: {fileID: 4397034438188595356}
   m_Layer: 6
   m_Name: GruntPolyart
   m_TagString: Enemy
@@ -175,6 +176,21 @@ MonoBehaviour:
   barPoint: {fileID: 8805952149153153637}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &4397034438188595356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8533394356236954493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6815874bea58b479f9ffdb666396db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - item: {fileID: 2026144806668819932, guid: 834994eb3b903e44da04a9c424f1cd43, type: 3}
+    weight: 0.8
 --- !u!1 &8533394356329969293
 GameObject:
   m_ObjectHideFlags: 0

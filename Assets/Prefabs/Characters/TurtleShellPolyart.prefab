@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 5954855495343025131}
   - component: {fileID: 5954855495343025132}
   - component: {fileID: -8927344880498299663}
+  - component: {fileID: 3804247825581298316}
   m_Layer: 6
   m_Name: TurtleShellPolyart
   m_TagString: Enemy
@@ -269,6 +270,21 @@ MonoBehaviour:
   barPoint: {fileID: 8637206136477999376}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &3804247825581298316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088269103161463762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6815874bea58b479f9ffdb666396db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - item: {fileID: 972364762007065460, guid: d2ba5b5ef13cf324686c80aeb40494f6, type: 3}
+    weight: 0.9
 --- !u!1 &1201770466212342760
 GameObject:
   m_ObjectHideFlags: 0

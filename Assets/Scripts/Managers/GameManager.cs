@@ -11,6 +11,12 @@ public class GameManager : Singleton<GameManager>
 
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
 
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(gameObject); // 确保GameManager在场景切换时不会被销毁
+    }
+
     public void RigisterPlayer(CharacterStats player)
     {
         playerStats = player;
@@ -20,6 +26,12 @@ public class GameManager : Singleton<GameManager>
         {
             followCamera.Follow = playerStats.transform.GetChild(2); // 摄像机跟随玩家的LookAtPoint
             followCamera.LookAt = playerStats.transform.GetChild(2); // 摄像机注视玩家的LookAtPoint
+            Debug.Log("playerStats.transform.GetChild(2).name: " + playerStats.transform.GetChild(2).name); // 输出LookAtPoint的名称
+            Debug.Log("playerStats.transform.GetChild(2).position: " + playerStats.transform.GetChild(2).position); // 输出LookAtPoint的位置
+        }
+        else
+        {
+            Debug.LogError("CinemachineFreeLook component not found in the scene. Please ensure it is present for camera follow functionality.");
         }
     }
 

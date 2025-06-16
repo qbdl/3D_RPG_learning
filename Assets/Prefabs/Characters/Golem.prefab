@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 5004925782146071611}
   - component: {fileID: 5004925782146071610}
   - component: {fileID: -8316276196416964605}
+  - component: {fileID: 7141288296238399301}
   m_Layer: 6
   m_Name: Golem
   m_TagString: Enemy
@@ -208,6 +209,21 @@ MonoBehaviour:
   barPoint: {fileID: 5662461947486698116}
   alwaysVisible: 0
   visibleTime: 3
+--- !u!114 &7141288296238399301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5004925781075663679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6815874bea58b479f9ffdb666396db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootItems:
+  - item: {fileID: 4242340806423168099, guid: fe8e5cd71f73aad4b9b5c38cf4c274b7, type: 3}
+    weight: 1
 --- !u!1 &5004925781097523350
 GameObject:
   m_ObjectHideFlags: 0
