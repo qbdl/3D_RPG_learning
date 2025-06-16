@@ -22,9 +22,11 @@ public class ItemData_SO : ScriptableObject
     [Header("Weapon & Armor")]
     public GameObject weaponPrefab; //武器prefab
     public AttackData_SO weaponData; //武器攻击数据
+    public AnimatorOverrideController weaponAnimator;//武器动画
 
     public GameObject armorPrefab; //盔甲prefab
     public CharacterData_SO armorData; //盔甲数据
+    public AnimatorOverrideController armorAnimator; //盔甲动画
 
 
 }

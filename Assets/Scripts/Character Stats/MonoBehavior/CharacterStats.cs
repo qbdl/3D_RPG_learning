@@ -7,14 +7,17 @@ public class CharacterStats : MonoBehaviour
 {
     public event Action<int, int> UpdateHealthBarOnAttack;// 攻击时更新血量条事件
 
-    public CharacterData_SO templateData; // 角色模板数据
+    public CharacterData_SO templateData; // 角色template数据
     public CharacterData_SO characterData; // 角色数据
-    public AttackData_SO attackData; // 攻击数据(template)
-    private AttackData_SO baseAttackData; // 基础攻击数据（用于重置武器数据）
+    public AttackData_SO templateAttackData; // 攻击template数据
+    public AttackData_SO attackData; // 攻击数据
+    private RuntimeAnimatorController baseAnimator; // 基础无装备时动画（用于重置动画）
+
 
     [Header("Weapon & Armor")]
-    public Transform weaponSlot;// 武器位置（用于对应的装上武器） 
+    public Transform weaponSlot; // 武器位置（用于对应的装上武器） 
     public Transform armorSlot; // 盔甲位置（用于对应的装上盔甲）
+    private int equipmentNum; // 已装备的装备数量
 
     [HideInInspector]
     public bool isCritical;
@@ -23,7 +26,9 @@ public class CharacterStats : MonoBehaviour
     {
         if (templateData != null)
             characterData = Instantiate(templateData); // 克隆模板数据
-        baseAttackData = Instantiate(attackData); // 克隆基础攻击数据
+        attackData = Instantiate(templateAttackData); // 克隆基础攻击数据
+        baseAnimator = GetComponent<Animator>().runtimeAnimatorController; // 获取基础无装备时动画
+        equipmentNum = 0;// 初始化已装备的装备数量
     }
 
     #region Read from Data_SO
@@ -85,8 +90,8 @@ public class CharacterStats : MonoBehaviour
     private int CurrentDamage()
     {
         float coreDamage = UnityEngine.Random.Range(attackData.minDamage, attackData.maxDamage);
-        //是否暴击
-        // Debug.Log($"Core Damage: {coreDamage}, Critical: {isCritical}");
+        // //是否暴击
+        // // Debug.Log($"Core Damage: {coreDamage}, Critical: {isCritical}");
         return (int)(coreDamage * (isCritical ? attackData.criticalMultiplier : 1));
     }
 
@@ -98,7 +103,6 @@ public class CharacterStats : MonoBehaviour
         UnEquipWeapon(); // 卸下当前武器
         EquipWeapon(weapon); // 装备新武器
     }
-
     public void ChangeArmor(ItemData_SO armor)
     {
         UnEquipArmor(); // 卸下当前盔甲
@@ -115,9 +119,15 @@ public class CharacterStats : MonoBehaviour
 
         //装备武器后更新属性
         attackData.ApplyWeaponData(weapon.weaponData);
-        //TODO:切换动画
+        //切换动画
+        equipmentNum++;
+        // Debug.Log($"EquipWeapon: Current equipment count is {equipmentNum} for weapon {weapon.itemName}");
+        if (equipmentNum == 1)
+        {
+            //换成持盾与剑的动画
+            GetComponent<Animator>().runtimeAnimatorController = weapon.weaponAnimator;
+        }
     }
-
     public void UnEquipWeapon()
     {
         // 销毁武器
@@ -125,31 +135,23 @@ public class CharacterStats : MonoBehaviour
         {
             for (int i = 0; i < weaponSlot.transform.childCount; i++)
                 Destroy(weaponSlot.transform.GetChild(i).gameObject);
+
+            // 只有在实际卸下武器时才减少 equipmentNum
+            equipmentNum = Mathf.Max(0, equipmentNum - 1);
+            // Debug.Log($"UnEquipWeapon: Current equipment count is {equipmentNum}");
         }
 
         //卸下武器后更新属性
-        attackData.ApplyWeaponData(baseAttackData);
-        //TODO:切换动画
+        attackData.ApplyWeaponData(templateAttackData); // 重置为基础攻击数据
+        //切换动画
+        if (equipmentNum == 0)
+        {
+            //换成空手动画
+            GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
+        }
     }
-
     public void EquipArmor(ItemData_SO armor)
     {
-        // if (armor == null)
-        // {
-        //     Debug.LogError("EquipArmor: armor is null!");
-        //     return;
-        // }
-        // if (armor.itemType != ItemType.Armor)
-        // {
-        //     Debug.LogError("EquipArmor: The item is not an armor!");
-        //     return;
-        // }
-        // if (armor.armorPrefab == null)
-        // {
-        //     Debug.LogError($"EquipArmor: armor prefab is null for armor {armor.name}");
-        //     return;
-        // }
-
         // 将armor prefab生成到 armorSlot位置
         if (armor.armorPrefab != null && armor.itemType == ItemType.Armor)
             Instantiate(armor.armorPrefab, armorSlot);
@@ -159,7 +161,14 @@ public class CharacterStats : MonoBehaviour
         // 装备盔甲后更新属性
         characterData.baseDefence = armor.armorData.baseDefence;
         characterData.currentDefence = armor.armorData.currentDefence;
-        //TODO:切换动画
+        //切换动画
+        equipmentNum++;
+        // Debug.Log($"EquipArmor: Current equipment count is {equipmentNum} for armor {armor.itemName}");
+        if (equipmentNum == 1)
+        {
+            //换成持盾与剑的动画
+            GetComponent<Animator>().runtimeAnimatorController = armor.armorAnimator;
+        }
     }
     public void UnEquipArmor()
     {
@@ -168,12 +177,21 @@ public class CharacterStats : MonoBehaviour
         {
             for (int i = 0; i < armorSlot.transform.childCount; i++)
                 Destroy(armorSlot.transform.GetChild(i).gameObject);
+
+            // 只有在实际卸下武器时才减少 equipmentNum
+            equipmentNum = Mathf.Max(0, equipmentNum - 1);
+            // Debug.Log($"UnEquipArmor: Current equipment count is {equipmentNum}");
         }
 
         // 卸下盔甲后更新属性
         characterData.baseDefence = templateData.baseDefence; // 重置为模板数据的基础防御
         characterData.currentDefence = templateData.currentDefence; // 重置为模板数据的当前防御
-        //TODO:切换动画
+        //切换动画
+        if (equipmentNum == 0)
+        {
+            //换成空手动画
+            GetComponent<Animator>().runtimeAnimatorController = baseAnimator;
+        }
     }
     #endregion
 

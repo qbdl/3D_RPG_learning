@@ -226,7 +226,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templateData: {fileID: 11400000, guid: 6c512f8f319e1314c83e7f290a6e0921, type: 2}
   characterData: {fileID: 0}
-  attackData: {fileID: 11400000, guid: 5143078263c06b343b74c32e2334731c, type: 2}
+  templateAttackData: {fileID: 11400000, guid: 5143078263c06b343b74c32e2334731c, type: 2}
+  attackData: {fileID: 0}
+  weaponSlot: {fileID: 0}
+  armorSlot: {fileID: 0}
   isCritical: 0
 --- !u!195 &5954855495343025132
 NavMeshAgent:

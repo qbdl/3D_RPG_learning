@@ -45,11 +45,23 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                InventoryManager.Instance.CheckInEquipmentUI(eventData.position) ||
                InventoryManager.Instance.CheckInActionUI(eventData.position))
             {
+                if (eventData.pointerEnter == null)
+                {
+                    Debug.LogError("My Debug OnEndDrag: pointerEnter is null!");
+                    return;
+                }
+
                 //检查鼠标指针悬停的对象（pointerEnter.gameObject）是否有 SlotHolder 组件
                 if (eventData.pointerEnter.gameObject.GetComponent<SlotHolder>())
                     targetSlotHolder = eventData.pointerEnter.gameObject.GetComponent<SlotHolder>();
                 else
                     targetSlotHolder = eventData.pointerEnter.gameObject.GetComponentInParent<SlotHolder>();//如果没有，则尝试从该对象的父对象中获取 SlotHolder 组件
+
+                if (targetSlotHolder == null)
+                {
+                    Debug.LogError("My Debug OnEndDrag: targetSlotHolder is null!");
+                    return;
+                }
 
                 switch (targetSlotHolder.slotType)
                 {
@@ -90,6 +102,13 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void SwapItem()
     {
+        //如果直接从当前场景进入，由于没有初始化背包会报错（所以要从主菜单进入游戏）
+        if (targetSlotHolder.itemUI.Bag == null || currentSlotHolder.itemUI.Bag == null)
+        {
+            Debug.LogError("My Debug SwapItem: Bag is null in targetSlotHolder or currentSlotHolder!");
+            return;
+        }
+
         //改变数据库
         var targetItem = targetSlotHolder.itemUI.Bag.items[targetSlotHolder.itemUI.Index];
         var tempItem = currentSlotHolder.itemUI.Bag.items[currentSlotHolder.itemUI.Index];
