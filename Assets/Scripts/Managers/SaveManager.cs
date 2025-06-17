@@ -42,14 +42,14 @@ public class SaveManager : Singleton<SaveManager>
     {
         var playerData = GameManager.Instance.playerStats.characterData;
         Save(playerData, playerData.name);
-        Debug.Log("Player data saved for: " + playerData.name); // 调试输出
+        // Debug.Log("Player data saved for: " + playerData.name); // 调试输出
     }
 
     public void LoadPlayerData()
     {
         var playerData = GameManager.Instance.playerStats.characterData;
         Load(playerData, playerData.name);
-        Debug.Log("Player data loaded for: " + playerData.name); // 调试输出
+        // Debug.Log("Player data loaded for: " + playerData.name); // 调试输出
     }
 
     /* -------- -------- */
