@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RigisterPlayer(CharacterStats player)
     {
-        Debug.Log("MY_DEBUG GameManager: RigisterPlayer called with player: " + player.name); // 输出注册的玩家名称
+        // Debug.Log("MY_DEBUG GameManager: RigisterPlayer called with player: " + player.name); // 输出注册的玩家名称
 
         playerStats = player;
         characterPanelCamera = playerStats.transform.Find("Camera").GetComponent<Camera>(); // 获取角色的Camera组件
@@ -34,8 +34,8 @@ public class GameManager : Singleton<GameManager>
         {
             followCamera.Follow = playerStats.transform.GetChild(2); // 摄像机跟随玩家的LookAtPoint
             followCamera.LookAt = playerStats.transform.GetChild(2); // 摄像机注视玩家的LookAtPoint
-            Debug.Log("playerStats.transform.GetChild(2).name: " + playerStats.transform.GetChild(2).name); // 输出LookAtPoint的名称
-            Debug.Log("playerStats.transform.GetChild(2).position: " + playerStats.transform.GetChild(2).position); // 输出LookAtPoint的位置
+            // Debug.Log("playerStats.transform.GetChild(2).name: " + playerStats.transform.GetChild(2).name); // 输出LookAtPoint的名称
+            // Debug.Log("playerStats.transform.GetChild(2).position: " + playerStats.transform.GetChild(2).position); // 输出LookAtPoint的位置
         }
         else
             Debug.LogError("CinemachineFreeLook component not found in the scene. Please ensure it is present for camera follow functionality.");
