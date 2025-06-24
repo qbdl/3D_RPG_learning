@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
 
     private CinemachineFreeLook followCamera; // 玩家摄像机
 
+    public Camera characterPanelCamera; // 用于人物面板的相机
+
     List<IEndGameObserver> endGameObservers = new List<IEndGameObserver>();
 
     protected override void Awake()
@@ -20,6 +22,10 @@ public class GameManager : Singleton<GameManager>
     public void RigisterPlayer(CharacterStats player)
     {
         playerStats = player;
+        characterPanelCamera = playerStats.transform.Find("Camera").GetComponent<Camera>(); // 获取角色的Camera组件
+        if (characterPanelCamera == null)
+            Debug.LogError("MY_DEBUG Character camera not found. Please ensure the player has a Camera component attached to the 'Camera' child.");
+
 
         followCamera = FindObjectOfType<CinemachineFreeLook>(); // 查找场景中的CinemachineFreeLook组件
         if (followCamera != null)

@@ -16,6 +16,8 @@
 
 **优化编辑器 参考网址**：[GitHub - SaberArtoriaFan/UnityEditorWindowDIY](https://github.com/SaberArtoriaFan/UnityEditorWindowDIY)
 
+**笔记可参考 博客**：[3D RPG 核心功能 (学习笔记 全) (M_Studio教程)_3d rpg course CSDN博客](https://blog.csdn.net/weixin_42264818/article/details/127396275)
+
 
 
 **Unity版本**：2020.2.0f1c1（同视频里的版本）
@@ -38,7 +40,7 @@
 
 - 按“A""D"左右移动视角，鼠标滚轮调整俯视程度，鼠标右键点击要去的地方
 
-- 传送门按”E"键开始传送，按“B"调出装备栏与任务栏
+- 传送门按”E"键开始传送，按“B"调出/关闭装备栏与任务栏
 - 数字键（非小键盘上的）1~6对应使用快捷栏上的物品
 - 按"ESC"返回主菜单
 

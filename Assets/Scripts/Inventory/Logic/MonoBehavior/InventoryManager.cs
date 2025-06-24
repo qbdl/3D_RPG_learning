@@ -32,6 +32,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public GameObject inventoryPanel; // 背包栏UI面板
     public GameObject statsPanel; // 装备栏(人物栏)UI面板
     bool isOpen = false;// 背包栏与装备栏是否打开
+    public Camera characterPanelCamera; // 用于人物面板的相机
 
     [Header("Stats Text")]
     public Text healthText; // 生命值文本
@@ -70,6 +71,13 @@ public class InventoryManager : Singleton<InventoryManager>
             inventoryPanel.SetActive(isOpen); // 切换背包栏UI面板的显示状态
             statsPanel.SetActive(isOpen); // 切换装备栏UI面板的显示状态
         }
+
+        // 控制人物面板的相机开关
+        if (GameManager.Instance.characterPanelCamera != null)
+            GameManager.Instance.characterPanelCamera.gameObject.SetActive(isOpen);
+        else
+            Debug.LogWarning("My_Debug : Character panel camera is not assigned in GameManager.");
+
 
         // 更新角色人物栏属性文本
         UpdateStatsText(
