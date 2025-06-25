@@ -8,5 +8,5 @@ public class DialogueOption
 {
     public string text;//选项内容
     public string nextDialogueID;//下一条对话的ID
-    public bool taskQuest;//是否是任务选项
+    public bool takeQuest;//是否是任务选项
 }

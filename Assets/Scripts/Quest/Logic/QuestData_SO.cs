@@ -22,4 +22,5 @@ public class QuestData_SO : ScriptableObject
     public bool isFinished; // 任务是否已结束
 
     public List<QuestRequire> questRequires = new List<QuestRequire>(); // 任务需求列表
+    public List<InventoryItem> rewards = new List<InventoryItem>(); // 任务奖励列表
 }
