@@ -8,6 +8,7 @@ public class DialoguePiece
 {
     public string ID;
     public Sprite image;//DialoguePiece中可以包含图片
+    [TextArea]
     public string text;//语句内容
 
     public List<DialogueOption> options = new List<DialogueOption>();//选项列表

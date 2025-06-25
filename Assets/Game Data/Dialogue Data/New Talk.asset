@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: New Talk
   m_EditorClassIdentifier: 
   dialoguePieces:
-  - ID: 
+  - ID: Piece01
     image: {fileID: 0}
-    text: 
-    options:
-    - text: 
-      nextDialogueID: 
-      taskQuest: 0
+    text: "\u65E9\u4E0A\u554A\u9A91\u58EB\uFF01"
+    options: []
+  - ID: Piece02
+    image: {fileID: 0}
+    text: "\u4ECA\u5929\u5929\u6C14\u771F\u4E0D\u9519\uFF01"
+    options: []
