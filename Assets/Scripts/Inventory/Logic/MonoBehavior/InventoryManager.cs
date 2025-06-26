@@ -156,9 +156,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     #endregion
 
-    #region 检测背包栏是否已有任务物品
+    #region 检测背包栏/快捷栏是否已有任务物品
 
-    // 任务接取时，背包栏是否已有任务物品(若有，数量直接加到任务进度中)
+    // 任务接取时，背包栏/快捷栏是否已有任务物品(若有，数量直接加到任务进度中)
     public void CheckQuestItemInBag(string questItemName)
     {
         // 背包栏
@@ -182,5 +182,18 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+    #endregion
+
+    #region 找到背包栏/快捷栏里 任务需要 的对应物品
+    //找到背包栏里 任务需要 的对应物品
+    public InventoryItem QuestItemInBag(ItemData_SO questItem)
+    {
+        return inventoryData.items.Find(i => i.itemData == questItem);
+    }
+    //找到快捷栏里 任务需要 的对应物品
+    public InventoryItem QuestItemInAction(ItemData_SO questItem)
+    {
+        return actionData.items.Find(i => i.itemData == questItem);
+    }
     #endregion
 }

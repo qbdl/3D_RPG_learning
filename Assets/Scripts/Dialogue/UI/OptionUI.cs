@@ -31,6 +31,11 @@ public class OptionUI : MonoBehaviour
                 if (QuestManager.Instance.HaveQuest(newTask.questData))
                 {
                     //判断是否完成给予奖励
+                    if (QuestManager.Instance.GetTask(newTask.questData).IsCompleted)
+                    {
+                        newTask.questData.GiveRewards(); // 给予奖励
+                        QuestManager.Instance.GetTask(newTask.questData).IsFinished = true; // 设置任务状态为已结束
+                    }
                 }
                 else
                 {

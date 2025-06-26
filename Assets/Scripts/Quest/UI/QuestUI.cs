@@ -74,7 +74,11 @@ public class QuestUI : Singleton<QuestUI>
         foreach (var require in questData.questRequires)
         {
             var q = Instantiate(questRequirementPrefab, requireTransform); // 实例化 任务Requirement
-            q.SetupRequirement(require.name, require.requireAmount, require.currentAmount); // 设置 任务Requirement
+            // 设置 任务Requirement
+            if (questData.isFinished) // 如果任务已结束
+                q.SetupRequirement(require.name, true);
+            else
+                q.SetupRequirement(require.name, require.requireAmount, require.currentAmount);
         }
     }
 

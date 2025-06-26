@@ -15,13 +15,17 @@ public class ItemUI : MonoBehaviour
     // 设置格子里的物品UI
     public void SetupItemUI(ItemData_SO item, int itemAmount)
     {
-        //物品数量小于等于0，则不显示物品图标和数量
-        if (itemAmount <= 0)
+        //物品数量等于0，则不显示物品图标和数量——用于背包中物品使用
+        if (itemAmount == 0)
         {
             Bag.items[Index].itemData = null;
             icon.gameObject.SetActive(false);//关闭icon（含text）这个部分
             return;
         }
+
+        //物品数量小于0——用于任务面板不显示扣除的物品
+        if (itemAmount < 0)
+            item = null;
 
         //物品数量大于0
         if (item != null)

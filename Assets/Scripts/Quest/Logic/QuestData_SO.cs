@@ -34,6 +34,38 @@ public class QuestData_SO : ScriptableObject
         if (isCompleted) Debug.Log($"Quest '{questName}' is completed!");
     }
 
+    //给予奖励，扣除对应物品
+    public void GiveRewards()
+    {
+        foreach (var reward in rewards)
+        {
+            if (reward.itemAmount < 0) // 需要上交的物品
+            {
+                int requireCount = Mathf.Abs(reward.itemAmount); // 需要扣除的数量
+                if (InventoryManager.Instance.QuestItemInBag(reward.itemData) != null) // 从背包栏中扣除对应物品
+                {
+                    if (InventoryManager.Instance.QuestItemInBag(reward.itemData).itemAmount >= requireCount) // 背包中对应物品的数量足够
+                    {
+                        InventoryManager.Instance.QuestItemInBag(reward.itemData).itemAmount -= requireCount;
+                        requireCount = 0; // 已经扣除所需数量
+                    }
+                    else
+                    {
+                        requireCount -= InventoryManager.Instance.QuestItemInBag(reward.itemData).itemAmount;
+                        InventoryManager.Instance.QuestItemInBag(reward.itemData).itemAmount = 0;
+                    }
+                }
+                if (requireCount > 0) // 如果还有未扣除的数量
+                    InventoryManager.Instance.QuestItemInAction(reward.itemData).itemAmount -= requireCount; // 从快捷栏中扣除对应物品
+            }
+            else // 给予奖励的物品
+                InventoryManager.Instance.inventoryData.AddItem(reward.itemData, reward.itemAmount); // 将奖励物品添加到背包
+        }
+
+        InventoryManager.Instance.inventoryUI.RefreshUI(); // 刷新背包UI
+        InventoryManager.Instance.actionUI.RefreshUI(); // 刷新快捷栏UI
+    }
+
     //当前任务中需要 收集/消灭的目标名字列表
     public List<string> RequireTargetName()
     {

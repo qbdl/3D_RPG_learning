@@ -19,4 +19,12 @@ public class QuestRequirement : MonoBehaviour
         requireName.text = name; // 设置任务需求名称
         progressNumber.text = $"{currentAmount}/{amount}"; // 设置进度数字
     }
+
+    public void SetupRequirement(string name, bool isFinished)
+    {
+        requireName.text = name; // 设置任务需求名称
+        progressNumber.text = "完成";
+        requireName.color = Color.gray; // 设置颜色为灰色
+        progressNumber.color = Color.gray;
+    }
 }
