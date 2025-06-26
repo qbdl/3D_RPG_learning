@@ -16,7 +16,11 @@ public class ItemPickUp : MonoBehaviour
             //装备武器
             // GameManager.Instance.playerStats.EquipWeapon(itemData);
 
-            Destroy(gameObject); //销毁物品
+            //如果有任务，更新任务进度  
+            QuestManager.Instance.UpdateQuestProgress(itemData.itemName, itemData.itemAmount);
+
+            //销毁场景中的物品
+            Destroy(gameObject);
         }
     }
 }

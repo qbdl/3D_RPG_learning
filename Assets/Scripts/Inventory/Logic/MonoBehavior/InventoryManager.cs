@@ -156,4 +156,31 @@ public class InventoryManager : Singleton<InventoryManager>
 
     #endregion
 
+    #region 检测背包栏是否已有任务物品
+
+    // 任务接取时，背包栏是否已有任务物品(若有，数量直接加到任务进度中)
+    public void CheckQuestItemInBag(string questItemName)
+    {
+        // 背包栏
+        foreach (var item in inventoryData.items)
+        {
+            if (item.itemData != null)
+            {
+                if (item.itemData.itemName == questItemName)// 如果背包中有对应的任务物品
+                    QuestManager.Instance.UpdateQuestProgress(item.itemData.itemName, item.itemAmount); // 更新任务进度
+            }
+        }
+
+        // 快捷栏
+        foreach (var item in actionData.items)
+        {
+            if (item.itemData != null)
+            {
+                if (item.itemData.itemName == questItemName)// 如果快捷栏中有对应的任务物品
+                    QuestManager.Instance.UpdateQuestProgress(item.itemData.itemName, item.itemAmount); // 更新任务进度
+            }
+        }
+    }
+
+    #endregion
 }

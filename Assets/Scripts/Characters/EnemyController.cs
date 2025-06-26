@@ -82,6 +82,10 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
 
         if (GetComponent<LootSpawner>() && isDead)
             GetComponent<LootSpawner>().Spawnloot(); // 如果有LootSpawner组件且敌人已死亡，则生成掉落物品
+
+        //死亡时更新任务进度
+        if (QuestManager.IsInitialized && isDead)
+            QuestManager.Instance.UpdateQuestProgress(this.name, 1); // 更新任务进度，传入敌人名称和数量（1）
     }
 
     void Update()

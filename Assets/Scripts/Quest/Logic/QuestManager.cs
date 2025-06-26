@@ -17,6 +17,19 @@ public class QuestManager : Singleton<QuestManager>
 
     public List<QuestTask> tasks = new List<QuestTask>(); // 任务列表
 
+    //更新任务进度——敌人死亡/拾取物品/初始接任务 时更新
+    public void UpdateQuestProgress(string requireName, int amount)
+    {
+        foreach (var task in tasks)
+        {
+            var matchTask = task.questData.questRequires.Find(r => r.name == requireName);
+            if (matchTask != null)
+                matchTask.currentAmount += amount; // 更新当前数量
+            task.questData.CheckQuestProgress(); // 检查任务是否完成
+        }
+    }
+
+
     //判断是否有重复任务
     public bool HaveQuest(QuestData_SO data)
     {
@@ -31,4 +44,5 @@ public class QuestManager : Singleton<QuestManager>
     {
         return tasks.Find(q => q.questData.questName == data.questName);
     }
+
 }

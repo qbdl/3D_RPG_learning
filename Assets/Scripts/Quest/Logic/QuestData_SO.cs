@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "New Quest", menuName = "Quest/Quest Data")]
 public class QuestData_SO : ScriptableObject
@@ -23,4 +24,23 @@ public class QuestData_SO : ScriptableObject
 
     public List<QuestRequire> questRequires = new List<QuestRequire>(); // 任务需求列表
     public List<InventoryItem> rewards = new List<InventoryItem>(); // 任务奖励列表
+
+    //检查 任务是否完成
+    public void CheckQuestProgress()
+    {
+        var finishRequires = questRequires.Where(r => r.currentAmount >= r.requireAmount);
+        isCompleted = finishRequires.Count() == questRequires.Count;
+
+        if (isCompleted) Debug.Log($"Quest '{questName}' is completed!");
+    }
+
+    //当前任务中需要 收集/消灭的目标名字列表
+    public List<string> RequireTargetName()
+    {
+        List<string> targetNameList = new List<string>();
+        foreach (var require in questRequires)
+            targetNameList.Add(require.name);
+
+        return targetNameList;
+    }
 }

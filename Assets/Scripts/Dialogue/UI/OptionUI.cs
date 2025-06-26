@@ -34,8 +34,14 @@ public class OptionUI : MonoBehaviour
                 }
                 else
                 {
+                    //没有任务，接受新任务
                     QuestManager.Instance.tasks.Add(newTask); // 添加任务到任务列表
                     QuestManager.Instance.GetTask(newTask.questData).IsStarted = true; // 设置任务状态为已开始(找到QuestManaager里的任务而不是临时变量)
+
+                    foreach (var requireItem in newTask.questData.RequireTargetName())
+                    {
+                        InventoryManager.Instance.CheckQuestItemInBag(requireItem); // 检查背包中是否有任务所需的物品
+                    }
                 }
             }
         }

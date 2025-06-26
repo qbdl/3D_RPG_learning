@@ -51,6 +51,9 @@ public class SlotHolder : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
                 GameManager.Instance.playerStats.ApplyUseableEffect(healthPoint, defencePoint); //应用使用物品的效果
 
                 itemUI.Bag.items[itemUI.Index].itemAmount--; //减少物品数量
+
+                //对应数量变化 更新回任务进度
+                QuestManager.Instance.UpdateQuestProgress(itemUI.GetItemData().itemName, -1);
             }
         }
         UpdateItem(); //更新物品UI显示
