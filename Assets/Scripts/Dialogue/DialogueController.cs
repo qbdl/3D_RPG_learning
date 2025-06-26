@@ -20,15 +20,24 @@ public class DialogueController : MonoBehaviour
     {
         Debug.Log("触发对话区域");
         if (other.CompareTag("Player") && currentDialogueData != null)
-        {
             canTalk = true; // 玩家进入触发器区域，可以对话
+    }
+
+    //离开npc对话区域
+    void OnTriggerExit(Collider other)
+    {
+        Debug.Log("离开对话区域");
+        if (other.CompareTag("Player"))
+        {
+            DialogueUI.Instance.dialoguePanel.SetActive(false); // 关闭对话面板
+            canTalk = false; // 玩家离开触发器区域，不能对话
         }
     }
 
     void OpenDialogue()
     {
         //打开UI面板 , 传输对话内容
-        
+
         DialogueUI.Instance.UpdateDialogueData(currentDialogueData); // 更新对话数据
         DialogueUI.Instance.UpdateMainDialogue(currentDialogueData.dialoguePieces[0]); // 更新主对话内容
     }

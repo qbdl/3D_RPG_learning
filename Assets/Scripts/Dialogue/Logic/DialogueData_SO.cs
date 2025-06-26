@@ -30,4 +30,18 @@ public class DialogueData_SO : ScriptableObject
     }
 #endif
 
+    //找到整段对话中包含的最早Quest
+    public QuestData_SO GetQuest()
+    {
+        QuestData_SO currentQuest = null;
+        foreach (var piece in dialoguePieces)
+        {
+            if (piece.quest != null)
+            {
+                currentQuest = piece.quest;
+                return currentQuest;
+            }
+        }
+        return currentQuest;
+    }
 }
