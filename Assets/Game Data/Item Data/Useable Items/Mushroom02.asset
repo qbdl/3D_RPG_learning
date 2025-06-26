@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mushroom02
   m_EditorClassIdentifier: 
   itemType: 0
-  itemName: "\u5927\u8611\u83C7"
+  itemName: "\u9EC4\u8272\u5927\u8611\u83C7"
   itemIcon: {fileID: 21300000, guid: 6fdbb6e976171524ab8f36ac55c2afd3, type: 3}
   itemAmount: 1
   itemDescription: "\u770B\u8D77\u6765\u597D\u5403\u7684\u5927\u8611\u83C7\uFF0C\u53EF\u4EE5\u56DE\u590D10\u70B9\u751F\u547D\u503C\u3002"
@@ -21,5 +21,7 @@ MonoBehaviour:
   useableItemData: {fileID: 11400000, guid: 3d3b0b3e1bd01014c89d0342abbab4da, type: 2}
   weaponPrefab: {fileID: 0}
   weaponData: {fileID: 0}
+  weaponAnimator: {fileID: 0}
   armorPrefab: {fileID: 0}
   armorData: {fileID: 0}
+  armorAnimator: {fileID: 0}

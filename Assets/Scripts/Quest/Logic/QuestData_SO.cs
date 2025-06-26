@@ -8,7 +8,7 @@ public class QuestData_SO : ScriptableObject
     [System.Serializable]
     public class QuestRequire
     {
-        public string name;
+        public string name; //要收集东西/杀掉怪 的名字
         public int requireAmount; // 需要的数量
         public int currentAmount; // 当前完成的数量
     }

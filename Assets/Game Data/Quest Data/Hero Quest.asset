@@ -27,3 +27,5 @@ MonoBehaviour:
   rewards:
   - itemData: {fileID: 11400000, guid: 4dd4269fe49abab4f9929098fcf551bf, type: 2}
     itemAmount: 1
+  - itemData: {fileID: 11400000, guid: 1198ee37793e933409907800dcebf74f, type: 2}
+    itemAmount: 2
