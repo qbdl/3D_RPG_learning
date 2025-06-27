@@ -24,6 +24,7 @@ public class SaveManager : Singleton<SaveManager>
 
             SaveManager.Instance.SavePlayerData();  // 保存玩家数据
             InventoryManager.Instance.SaveData();   // 保存背包和装备栏数据
+            QuestManager.Instance.SaveQuestManager(); // 保存任务数据
 
             SceneController.Instance.TransitionToMainMenu();
         }

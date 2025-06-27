@@ -59,7 +59,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
     {
         StartCoroutine(LoadMain());
     }
-    // 用于在游戏进入时加载指定场景
+    // 用于在游戏进入时加载指定场景(从主菜单点击New Game时调用的函数)
     public void TransitionToLoadGame()
     {
         StartCoroutine(LoadLevel(SaveManager.Instance.SceneName)); // 加载保存的场景
@@ -89,6 +89,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
         //保存数据（如玩家状态、物品等）
         SaveManager.Instance.SavePlayerData(); // 保存玩家数据
         InventoryManager.Instance.SaveData(); // 保存背包等数据
+        QuestManager.Instance.SaveQuestManager(); // 保存任务数据
 
 
         //检测当前场景与目标场景是否相同
@@ -102,6 +103,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
             yield return Instantiate(playerPrefab, GetDestination(destinationTag).transform.position, GetDestination(destinationTag).transform.rotation);// 实例化玩家对象
             SaveManager.Instance.LoadPlayerData(); // 加载玩家数据
             InventoryManager.Instance.LoadData(); // TODO:这是我自己加上的：加载背包等数据
+            QuestManager.Instance.LoadQuestManager(); //  TODO:这是我自己加上的：加载任务数据
 
             yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
 
@@ -135,6 +137,7 @@ public class SceneController : Singleton<SceneController>, IEndGameObserver
             //保存游戏
             SaveManager.Instance.SavePlayerData();
             InventoryManager.Instance.SaveData();
+            QuestManager.Instance.SaveQuestManager();
 
             yield return StartCoroutine(temp_fade.FadeIn(fadeTime)); // 再淡入新场景
 

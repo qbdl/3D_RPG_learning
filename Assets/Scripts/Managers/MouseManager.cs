@@ -21,12 +21,20 @@ public class MouseManager : Singleton<MouseManager>
     {
         SetCursorTexture();//鼠标移动到时：换鼠标贴图
         if (!InteractWithUI())
-            MouseControl();//鼠标点击时：触发事件
+            MouseControl();//鼠标点击时：触发移动/攻击事件
     }
 
     void SetCursorTexture()
     {
         // Debug.Log("enter into SetCursorTexture");
+        //鼠标悬停在UI上，设置为point贴图
+        if (InteractWithUI())
+        {
+            Cursor.SetCursor(point, Vector2.zero, CursorMode.Auto);
+            return;
+        }
+
+        //鼠标不在UI上
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo))
         {

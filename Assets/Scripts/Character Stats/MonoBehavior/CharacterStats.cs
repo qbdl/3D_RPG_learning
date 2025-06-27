@@ -124,7 +124,7 @@ public class CharacterStats : MonoBehaviour
         attackData.ApplyWeaponData(weapon.weaponData);
         //切换动画
         equipmentNum++;
-        Debug.Log($"EquipWeapon: Current equipment count is {equipmentNum} for weapon {weapon.itemName}");
+        // Debug.Log($"EquipWeapon: Current equipment count is {equipmentNum} for weapon {weapon.itemName}");
         if (equipmentNum == 1)
         {
             //换成持盾与剑的动画
@@ -141,7 +141,7 @@ public class CharacterStats : MonoBehaviour
 
             // 只有在实际卸下武器时才减少 equipmentNum
             equipmentNum = Mathf.Max(0, equipmentNum - 1);
-            Debug.Log($"UnEquipWeapon: Current equipment count is {equipmentNum}");
+            // Debug.Log($"UnEquipWeapon: Current equipment count is {equipmentNum}");
         }
 
         //卸下武器后更新属性
