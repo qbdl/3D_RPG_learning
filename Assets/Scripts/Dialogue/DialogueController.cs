@@ -18,7 +18,7 @@ public class DialogueController : MonoBehaviour
     //触发npc对话
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("触发对话区域");
+        // Debug.Log("触发对话区域");
         if (other.CompareTag("Player") && currentDialogueData != null)
             canTalk = true; // 玩家进入触发器区域，可以对话
     }
@@ -26,7 +26,7 @@ public class DialogueController : MonoBehaviour
     //离开npc对话区域
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("离开对话区域");
+        // Debug.Log("离开对话区域");
         if (other.CompareTag("Player"))
         {
             DialogueUI.Instance.dialoguePanel.SetActive(false); // 关闭对话面板

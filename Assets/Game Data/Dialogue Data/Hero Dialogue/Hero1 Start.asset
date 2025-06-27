@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62372801aa73634bad40c9bb98e0bdc, type: 3}
+  m_Name: Hero1 Start
+  m_EditorClassIdentifier: 
+  dialoguePieces:
+  - ID: Piece01
+    image: {fileID: 21300000, guid: ec324302f42d03543aa426d9f9fc86f1, type: 3}
+    text: "\u6668\u5149\u7167\u8000\uFF0C\u52C7\u6BC5\u7684\u9A91\u58EB\uFF01 "
+    quest: {fileID: 0}
+    options:
+    - text: "\u6668\u5B89\uFF0C\u53CB\u4EBA\u3002"
+      nextDialogueID: 
+      takeQuest: 0
+    - text: "\u53EF\u6709\u5DEE\u9063\uFF1F"
+      nextDialogueID: Piece02
+      takeQuest: 0
+  - ID: Piece02
+    image: {fileID: 21300000, guid: ec324302f42d03543aa426d9f9fc86f1, type: 3}
+    text: "\u5BC6\u6797\u6DF1\u5904\u65B0\u751F\u4E86\u7A00\u7F55\u7684\u300E\u9EC4\u8272\u5927\u8611\u83C7\u300F\u3002\u82E5\u9601\u4E0B\u80AF\u4E3A\u6211\u91C7\u96C6\u4E24\u6735\uFF0C\u5FC5\u83B7\u539A\u793C\u76F8\u916C\u3002"
+    quest: {fileID: 11400000, guid: b1051b58a63d0604ca1e28d73a0d8140, type: 2}
+    options:
+    - text: "\u8C28\u9075\u6240\u6258\uFF0C\u5FC5\u4E0D\u8FB1\u547D\uFF01"
+      nextDialogueID: 
+      takeQuest: 1
+    - text: "\u6211\u5BF9\u8611\u83C7\u8FC7\u654F..."
+      nextDialogueID: 
+      takeQuest: 0

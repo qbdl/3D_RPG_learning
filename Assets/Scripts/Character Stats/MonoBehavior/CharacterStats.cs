@@ -117,6 +117,9 @@ public class CharacterStats : MonoBehaviour
         else
             Debug.LogError($"EquipWeapon: weapon prefab is null or item type is not Weapon for weapon {weapon.name}");
 
+        // Debug.Log("Weapon Slot position: " + weaponSlot.position);
+        // Debug.Log("Weapon Slot rotation: " + weaponSlot.rotation);
+
         //装备武器后更新属性
         attackData.ApplyWeaponData(weapon.weaponData);
         //切换动画

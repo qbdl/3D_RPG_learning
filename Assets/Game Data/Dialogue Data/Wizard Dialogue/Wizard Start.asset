@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62372801aa73634bad40c9bb98e0bdc, type: 3}
+  m_Name: Wizard Start
+  m_EditorClassIdentifier: 
+  dialoguePieces:
+  - ID: Piece01
+    image: {fileID: 21300000, guid: 27d957ea8609e50469c8449826cb688d, type: 3}
+    text: "\u6668\u66E6\u900F\u8FC7\u5854\u9876\u6C34\u6676\u6D12\u4E0B\u94F6\u8F89\u2014\u2014\u54E6\uFF01\u662F\u4F60\u554A\uFF0C\u52C7\u6562\u7684\u65C5\u8005\u3002"
+    quest: {fileID: 0}
+    options:
+    - text: "\u65E9\u5B89\uFF0C\u5927\u8D24\u8005\u3002"
+      nextDialogueID: 
+      takeQuest: 0
+    - text: "\u60A8\u53EC\u5524\u6211\uFF0C\u6709\u4E8B\u5417\uFF1F"
+      nextDialogueID: Piece02
+      takeQuest: 0
+  - ID: Piece02
+    image: {fileID: 21300000, guid: 27d957ea8609e50469c8449826cb688d, type: 3}
+    text: "\u8FD1\u6765\u9B54\u5854\u4E0B\u65B9\u7684\u5E7D\u5F71\u5BC6\u6797\u91CC\uFF0C\u90AA\u9ECF\u7684\u53F2\u83B1\u59C6\u548C\u7EFF\u8272\u5927\u9F9F\u75AF\u72C2\u5B73\u751F\u3002\u5B83\u4EEC\u5543\u566C\u9B54\u8109\u6839\u987B\uFF0C\u82E5\u4E0D\u53CA\u65F6\u51C0\u5316\uFF0C\u6574\u5EA7\u738B\u56FD\u7684\u9B54\u529B\u90FD\u5C06\u52A8\u8361\u3002\n\u66FF\u6211\u6D88\u706D3\u53EA\u53F2\u83B1\u59C6\u548C2\u53EA\u7EFF\u8272\u5927\u9F9F\u5427\uFF01\u4E8B\u6210\u4E4B\u540E\uFF0C\u6211\u5C06\u5949\u4E0A\u73CD\u7A00\u7684\u300E\u9ED1\u66DC\u5DE8\u5203\u300F\u76F8\u916C\u3002"
+    quest: {fileID: 11400000, guid: 200b690c3cbfed04ebb539a1d2187d9e, type: 2}
+    options:
+    - text: "\u597D\u7684\uFF0C\u6CA1\u95EE\u9898\uFF01"
+      nextDialogueID: 
+      takeQuest: 1
+    - text: "\u53F2\u83B1\u59C6\u592A\u9ECF\u2026\u2026\u6211\u8FD8\u662F\u518D\u60F3\u60F3\u2026\u2026"
+      nextDialogueID: 
+      takeQuest: 0

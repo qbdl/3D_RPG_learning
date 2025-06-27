@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced93c63b42742e4cb8808025b2b0385, type: 3}
+  m_Name: FemaleKnight Quest Grunt
+  m_EditorClassIdentifier: 
+  questName: "\u6D88\u706D\u5317\u9E93\u5DE8\u4EBA"
+  description: "\u5973\u9A91\u58EB\u9601\u4E0B\u5E0C\u671B\u6211\u6D88\u706D2\u5934\u7EFF\u5DE8\u4EBA\uFF0C\u90A3\u4E48\u5979\u8BF4\u4F1A\u7ED9\u6211\u4E00\u4E9B\u5956\u52B1\u3002"
+  isStarted: 0
+  isCompleted: 0
+  isFinished: 0
+  questRequires:
+  - name: Grunt
+    requireAmount: 2
+    currentAmount: 0
+  rewards:
+  - itemData: {fileID: 11400000, guid: cec40335ed354484091f4fb6ad3ee9ac, type: 2}
+    itemAmount: 1
