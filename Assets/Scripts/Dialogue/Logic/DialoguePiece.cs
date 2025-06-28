@@ -13,6 +13,9 @@ public class DialoguePiece
 
     public QuestData_SO quest;//这条对话的任务数据
 
+    [HideInInspector]
+    public bool canExpand;//是否可以展开（用于扩展编辑器的折叠功能）
+
     public List<DialogueOption> options = new List<DialogueOption>();//选项列表
 
 }
