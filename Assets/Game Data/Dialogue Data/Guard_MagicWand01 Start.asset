@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62372801aa73634bad40c9bb98e0bdc, type: 3}
+  m_Name: Guard_MagicWand01 Start
+  m_EditorClassIdentifier: 
+  dialoguePieces:
+  - ID: Piece01
+    image: {fileID: 21300000, guid: 58cdebaccd3061e458ff5d23632f1110, type: 3}
+    text: "\u543C\u2014\u2014\u522B\u5F80\u524D\u632A\uFF01\u90A3\u5EA7\u9AD8\u5C71\u53EF\u4E0D\u662F\u98CE\u666F\u533A\uFF0C\u800C\u662F\u2018\u6454\u4E0B\u53BB\u518D\u4E5F\u722C\u4E0D\u4E0A\u6765\u7814\u7A76\u6240\u2019\uFF01\u6211\u548C\u90A3\u4F4D\u677F\u7740\u8138\u7684\u5B88\u536B\u4E00\u8D77\u770B\u95E8\u2014\u2014\u4ED6\u8D1F\u8D23\u51F6\uFF0C\u6211\u8D1F\u8D23\u5E7D\u9ED8\uFF0C\u4F46\u7ED3\u8BBA\u4E00\u6837\uFF1A\u56DE\xB7\u5934\xB7\u5427\u3002"
+    quest: {fileID: 0}
+    canExpand: 0
+    options:
+    - text: "\u54C8\uFF0C\u597D\u5427\u5927\u5E08\uFF0C\u547D\u90FD\u53EA\u6709\u4E00\u6761\uFF0C\u6211\u64A4\uFF01"
+      nextDialogueID: 
+      takeQuest: 0

@@ -69,3 +69,5 @@ cd 3D_RPG_learning
 ### DialogueData_SO的扩展编辑器说明
 
 如果不需要最后部分加入的编辑器扩展功能，即针对DialogueData_SO的扩展编辑，可以删除`Assets/Scripts/Editor`文件夹，这不会影响游戏的使用。
+
+如需使用，解注释即可。
