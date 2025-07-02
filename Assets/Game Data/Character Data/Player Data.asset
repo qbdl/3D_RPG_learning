@@ -22,3 +22,7 @@ MonoBehaviour:
   baseExp: 50
   currentExp: 0
   levelBuff: 0.1
+  currentMoveSpeed: 3.5
+  maxMoveSpeed: 6
+  baseMoveSpeed: 3.5
+  speedGrowthRate: 0.05

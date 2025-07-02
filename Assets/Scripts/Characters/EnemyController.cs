@@ -274,13 +274,13 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
         //areaMask 是一个整数值，用作位掩码（Bitmask），表示允许搜索的导航区域。第1位表示Walkable区域,即找到的点是否为Walkable。
     }
 
-    // void OnDrawGizmosSelected()
-    // {
-    //     // 在编辑器中显示可视范围
-    //     // Debug.Log("OnDrawGizmosSelected is called");
-    //     Gizmos.color = Color.blue;
-    //     Gizmos.DrawWireSphere(transform.position, sightRadius);
-    // }
+    void OnDrawGizmosSelected()
+    {
+        // 在编辑器中显示可视范围
+        // Debug.Log("OnDrawGizmosSelected is called");
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, sightRadius);
+    }
     #endregion
 
     #region Animation Event

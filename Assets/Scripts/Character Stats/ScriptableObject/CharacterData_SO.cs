@@ -22,6 +22,12 @@ public class CharacterData_SO : ScriptableObject
     public int currentExp;
     public float levelBuff;
 
+    [Header("Movement")]
+    public float currentMoveSpeed;
+    public float maxMoveSpeed;
+    public float baseMoveSpeed;
+    public float speedGrowthRate;
+
     public float LevelMultiplier
     {
         get { return 1 + (currentLevel - 1) * levelBuff; }
@@ -46,6 +52,9 @@ public class CharacterData_SO : ScriptableObject
         currentHealth = maxHealth;
         baseDefence = (int)(baseDefence * LevelMultiplier); // 升级后基础防御值提升 
         currentDefence = baseDefence;
+
+        float newSpeed = baseMoveSpeed * (1.0f + speedGrowthRate * (currentLevel - 1)); // 新的移动速度
+        currentMoveSpeed = Mathf.Min(maxMoveSpeed, newSpeed);
 
         //TODO:攻击值改变
 

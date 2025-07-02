@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class CharacterStats : MonoBehaviour
     public AttackData_SO templateAttackData; // 攻击template数据
     public AttackData_SO attackData; // 攻击数据
     private RuntimeAnimatorController baseAnimator; // 基础无装备时动画（用于重置动画）
+    private NavMeshAgent agent; // 用于控制移动的 NavMeshAgent
 
 
     [Header("Weapon & Armor")]
@@ -25,7 +27,14 @@ public class CharacterStats : MonoBehaviour
     void Awake()
     {
         if (templateData != null)
+        {
             characterData = Instantiate(templateData); // 克隆模板数据
+
+            agent = GetComponent<NavMeshAgent>(); // 获取 NavMeshAgent
+            if (agent != null && GetComponent<PlayerController>() != null)
+                agent.speed = characterData.currentMoveSpeed; // 仅为Player设置 NavMeshAgent 的速度
+        }
+
         attackData = Instantiate(templateAttackData); // 克隆基础攻击数据
         baseAnimator = GetComponent<Animator>().runtimeAnimatorController; // 获取基础无装备时动画
         equipmentNum = 0;// 初始化已装备的装备数量

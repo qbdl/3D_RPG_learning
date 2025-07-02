@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c69b918bd9d7974bb8d1ea0e900f5e7, type: 3}
   m_Name: Slime Data
   m_EditorClassIdentifier: 
-  maxHealth: 15
-  currentHealth: 15
-  baseDefence: 2
-  currentDefence: 2
-  killPoint: 10
+  maxHealth: 20
+  currentHealth: 20
+  baseDefence: 1
+  currentDefence: 1
+  killPoint: 5
   currentLevel: 0
   maxLevel: 0
   baseExp: 0
   currentExp: 0
   levelBuff: 0
+  currentMoveSpeed: 0
+  maxMoveSpeed: 0
+  baseMoveSpeed: 0
+  speedGrowthRate: 0
