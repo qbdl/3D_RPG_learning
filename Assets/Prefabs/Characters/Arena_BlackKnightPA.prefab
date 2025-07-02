@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 474629553}
   - component: {fileID: 474629554}
   m_Layer: 6
-  m_Name: Arena_BlackKnightPADefault
+  m_Name: Arena_BlackKnightPA
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1202,6 +1202,7 @@ Transform:
   m_Children:
   - {fileID: 5191432155019428970}
   - {fileID: 5191432155019428964}
+  - {fileID: 2582549671987126578}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1290,10 +1291,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f708084ad9453444968cb363b161d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 0
+  sightRadius: 4
   isGuard: 0
-  lookAtTime: 0
-  patrolRange: 0
+  lookAtTime: 3
+  patrolRange: 6
 --- !u!114 &474629553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,7 +1308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthUIPrefab: {fileID: 6243164006102189823, guid: f599a99fcf2e4cd44bc24d968a28afac, type: 3}
-  barPoint: {fileID: 0}
+  barPoint: {fileID: 2582549671987126578}
   alwaysVisible: 0
   visibleTime: 3
 --- !u!114 &474629554
@@ -2100,4 +2101,34 @@ Transform:
   - {fileID: 5191432155019428900}
   m_Father: {fileID: 5191432155019428964}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6401476108483715586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2582549671987126578}
+  m_Layer: 6
+  m_Name: HealthBar Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2582549671987126578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6401476108483715586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5191432155019428968}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
