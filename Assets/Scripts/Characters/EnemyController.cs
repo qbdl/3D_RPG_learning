@@ -144,6 +144,7 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
             case EnemyStates.PATROL:
                 isChase = false;
                 agent.speed = speed * 0.5f; // 巡逻时速度减半
+                agent.isStopped = false; // <-- 保险起见
 
                 //是否到达巡逻点
                 if (Vector3.Distance(transform.position, wayPoint) <= agent.stoppingDistance)
@@ -177,9 +178,8 @@ public class EnemyController : MonoBehaviour, IEndGameObserver
                     }
                     else
                     {
-                        //恢复状态
-                        if (isGuard) enemyStates = EnemyStates.GUARD;
-                        else enemyStates = EnemyStates.PATROL;
+                        agent.isStopped = false;//恢复移动
+                        enemyStates = isGuard ? EnemyStates.GUARD : EnemyStates.PATROL;//恢复之前状态
                     }
                 }
                 else//追击·

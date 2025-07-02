@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Arena_WerewolfPA
+  m_Controller: {fileID: 9100000, guid: 8bfc44762b203e3449d306c79aa2200e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: f10541572d6d93144ab62d62774e6af5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ec7891578adb90048926ea8ed51df4cc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7d58521943eb42b4c9b63ded3906e306, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2e0db04b5be44d0498d9e57ecab15899, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8cf19caeee9bb3c43a09d57a2a2ba09d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cec62ddf89764566b0f168a220f43814, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 005ef329f9069a341a4c65ac96ebd0c1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6e08643ac16d4f108f9aa7ee764d5831, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 8662c5c621c785c4b8030eac9758e764, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6c313319f4df43d49cb014d38d36df07, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: d71581b97fb501e488eb778f198bb010, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 286842c3f24948e297de9e1da962e204, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 25cc2c37e339f4e409306df4dde6c404, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 571d59d1e2fe4e5590b29b8be6762d25, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: db94335d337e94a43962c505a87693c3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 947f804b5972480388b72af145b055ea, type: 3}
