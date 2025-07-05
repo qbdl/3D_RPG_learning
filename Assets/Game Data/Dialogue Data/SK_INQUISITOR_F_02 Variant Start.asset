@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62372801aa73634bad40c9bb98e0bdc, type: 3}
+  m_Name: SK_INQUISITOR_F_02 Variant Start
+  m_EditorClassIdentifier: 
+  dialoguePieces:
+  - ID: Piece01
+    image: {fileID: 21300000, guid: bf0c8f0eb7c37564089308b2d91be144, type: 3}
+    text: "\u6B62\u6B65\u3002\u543E\u540D\u827E\u745F\u857E\u5A1C\u2014\u2014\u738B\u5BA4\u5BA1\u5224\u5B98\uFF0C\u4E5F\u662F\u5996\u65CF\u516C\u4E3B\u7684\u5F71\u5203\u62A4\u536B\u3002\u4ECA\u65E5\u9A7B\u5B88\u4E1C\u65B9\u5CF0\u5DC5\uFF0C\u8A93\u4EE5\u767D\u5203\u88C2\u98CE\u96EA\u3001\u4EE5\u94C1\u5F8B\u62D2\u7978\u60A3\u3002\u82E5\u6C5D\u6765\u610F\u826F\u5584\uFF0C\u4FBF\u4ECE\u6211\u5DE6\u7FFC\u7ED5\u884C\uFF1B\u5426\u5219\uFF0C\u5251\u950B\u5C06\u66FF\u6211\u5206\u8FA8\u771F\u4F2A\u3002"
+    quest: {fileID: 0}
+    canExpand: 0
+    options:
+    - text: "\u6211\u6765\u81EA\u5317\u9672\uFF0C\u53EA\u6C42\u4E00\u89C1\u516C\u4E3B\uFF0C\u65E0\u4ED6\u610F\u3002"
+      nextDialogueID: 
+      takeQuest: 0
+    - text: "\u827E\u745F\u857E\u5A1C\uFF0C\u6211\u613F\u52A9\u4F60\u5B88\u4E1C\u9685\u3002"
+      nextDialogueID: 
+      takeQuest: 0

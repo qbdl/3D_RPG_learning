@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62372801aa73634bad40c9bb98e0bdc, type: 3}
+  m_Name: SK_Succubus_Lucia Blue Start
+  m_EditorClassIdentifier: 
+  dialoguePieces:
+  - ID: Piece01
+    image: {fileID: 21300000, guid: ae8074e6317335e45bf0245d34e0c00e, type: 3}
+    text: "\u811A\u4E0B\u662F\u4E91\u6D77\u6DF1\u6E0A\uFF0C\u52C7\u8005\u2014\u2014\u518D\u5F80\u524D\u534A\u6B65\uFF0C\u661F\u8FB0\u90FD\u4F1A\u4E3A\u4F60\u53F9\u606F\u3002\u5C0F\u5FC3\u4E9B\uFF0C\u522B\u8BA9\u98CE\u628A\u4F60\u7684\u540D\u5B57\u5439\u8FDB\u8C37\u5E95\u3002"
+    quest: {fileID: 0}
+    canExpand: 0
+    options:
+    - text: "\u8C22\u8C22\u63D0\u9192\uFF0C\u6211\u4F1A\u6CE8\u610F\u8DB3\u4E0B\u3002"
+      nextDialogueID: Piece02
+      takeQuest: 0
+  - ID: Piece02
+    image: {fileID: 21300000, guid: ae8074e6317335e45bf0245d34e0c00e, type: 3}
+    text: "\u5C71\u4E0B\u7684\u90A3\u4F4D\u53E4\u602A\u5DEB\u5E08\u2026\u2026\u4ED6\u4ECD\u5B89\u597D\u5427\uFF1F\u6211\u6258\u98CE\u4FE1\u5B50\u66FF\u6211\u4E3A\u4ED6\u9001\u53BB\u795D\u798F\uFF0C\u53EF\u98CE\u56DE\u65F6\u5E26\u6765\u7684\u662F\u7070\u70EC\u7684\u6C14\u5473\u3002"
+    quest: {fileID: 0}
+    canExpand: 0
+    options:
+    - text: "\u4ED6\u65E0\u6059\uFF0C\u8FD8\u8BA9\u6211\u8F6C\u544A\u60A8\uFF1A\u661F\u706F\u957F\u660E\u3002"
+      nextDialogueID: Piece03
+      takeQuest: 0
+    - text: "\u4F3C\u4E4E\u53D7\u4E86\u70B9\u4F24\uFF0C\u4F46\u7CBE\u795E\u8FD8\u7B97\u632F\u4F5C\u3002 "
+      nextDialogueID: Piece03
+      takeQuest: 0
+  - ID: Piece03
+    image: {fileID: 21300000, guid: ae8074e6317335e45bf0245d34e0c00e, type: 3}
+    text: "\u542C\u89C1\u4F60\u7684\u56DE\u7B54\uFF0C\u6211\u7684\u5FC3\u5B89\u4E86\u4E9B\u3002\u52C7\u8005\uFF0C\u53EF\u613F\u4E0E\u6211\u4EEC\u4E00\u540C\u5B88\u671B\u8FD9\u7247\u5927\u9646\uFF1F\u5F53\u9ED1\u96FE\u518D\u4FB5\uFF0C\u613F\u6211\u4EEC\u5E76\u80A9\uFF0C\u633A\u5251\u5411\u524D\u3002"
+    quest: {fileID: 0}
+    canExpand: 0
+    options:
+    - text: "\u6211\u613F\u4E0E\u516C\u4E3B\u5E76\u80A9\u5B88\u62A4\uFF01"
+      nextDialogueID: 
+      takeQuest: 0
+    - text: "\u62B1\u6B49\uFF0C\u6211\u8FD8\u6709\u672A\u7ADF\u4E4B\u4E8B\u3002"
+      nextDialogueID: 
+      takeQuest: 0
