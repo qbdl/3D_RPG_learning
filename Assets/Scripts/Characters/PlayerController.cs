@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     private CharacterStats characterStats; //角色属性脚本
     private GameObject attackTarget; //记录传入的攻击目标对象
     private float lastAttackTime; //上次攻击时间(为了攻击有间隔)
+    // private float lastShieldTime; // 上次盾反时间 TODO:考虑后续有机会再加入，需要结合新的携程来做
 
     bool isDead; //是否死亡
+    bool isShielding; //是否正在盾反
 
     private float stopDistance; //默认的停止距离
 
@@ -46,6 +48,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isDead = characterStats.CurrentHealth <= 0;
+        //盾反
+        isShielding = Input.GetKey(KeyCode.G);//是否按住G键进行盾反（松开即取消）
+        characterStats.isDefend = isShielding; //更新characterStats的盾反状态
+        // Debug.Log("Shielding status: " + isShielding);
+
         if (isDead)//进行广播
             GameManager.Instance.NotifyObservers(); //通知所有观察者
 
@@ -58,7 +65,9 @@ public class PlayerController : MonoBehaviour
     private void SwitchAnimation()
     {
         anim.SetFloat("Speed", agent.velocity.sqrMagnitude); //设置前端的动画速度参数
+        anim.SetBool("Critical", characterStats.isCritical); //设置暴击状态
         anim.SetBool("Death", isDead); //设置死亡状态
+        anim.SetBool("Defend", isShielding); //设置盾反状态
     }
 
     public void MoveToTarget(Vector3 target)

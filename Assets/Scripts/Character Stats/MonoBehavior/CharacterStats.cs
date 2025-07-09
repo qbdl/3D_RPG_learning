@@ -22,7 +22,9 @@ public class CharacterStats : MonoBehaviour
     private int equipmentNum; // 已装备的装备数量
 
     [HideInInspector]
-    public bool isCritical;
+    public bool isCritical;  // 是否暴击
+    [HideInInspector]
+    public bool isDefend; // 是否盾反
 
     void Awake()
     {
@@ -70,17 +72,47 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(CharacterStats attacker, CharacterStats defender)
     {
-        int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence, 0);
-        CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+        //New : 加入盾反逻辑
+        // 判断是否为玩家，并且是否处于盾反状态
+        if (defender.GetComponent<PlayerController>() != null && defender.isDefend) //玩家盾反逻辑
+        {
+            // Debug.Log("Player is defending, applying shield rebound logic.");
 
-        if (attacker.isCritical)
-            defender.GetComponent<Animator>().SetTrigger("Hit"); //触发暴击动画
+            //计算伤害
+            int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence, 1); //盾反至少造成1点伤害
+            int damage_rebound = Mathf.Max(Mathf.CeilToInt(damage * 0.5f), 1); // 反弹攻击者伤害的50%
+            int damage_take = Mathf.Max(Mathf.CeilToInt(damage * 0.35f), 1); // 受到攻击者伤害的35%
 
-        //update血量UI
-        UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
-        //人物属性升级
-        if (CurrentHealth <= 0)
-            attacker.characterData.UpdateExp(characterData.killPoint);// 更新击杀者经验值
+            //伤害->生命
+            attacker.CurrentHealth = Mathf.Max(attacker.CurrentHealth - damage_rebound, 0);
+            CurrentHealth = Mathf.Max(CurrentHealth - damage_take, 0);
+            //动画
+            attacker.GetComponent<Animator>().SetTrigger("Hit");// 触发攻击者的 被盾反 动画
+            //血量UI
+            attacker.UpdateHealthBarOnAttack?.Invoke(attacker.CurrentHealth, attacker.MaxHealth);// 更新攻击者血量UI
+            UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);// 更新防御者血量UI
+            //经验值
+            if (attacker.CurrentHealth <= 0)
+                characterData.UpdateExp(attacker.characterData.killPoint);// 更新防御者经验值
+            if (CurrentHealth <= 0)
+                attacker.characterData.UpdateExp(characterData.killPoint);// 更新攻击者经验值
+        }
+        else // 普通伤害逻辑（非盾反）
+        {
+            // Debug.Log("Character is not defending, applying normal damage logic.");
+
+            int damage = Mathf.Max(attacker.CurrentDamage() - defender.CurrentDefence, 0);
+            CurrentHealth = Mathf.Max(CurrentHealth - damage, 0);
+
+            if (attacker.isCritical)
+                defender.GetComponent<Animator>().SetTrigger("Hit"); //触发暴击动画
+
+            //update血量UI
+            UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth);
+            //人物属性升级
+            if (CurrentHealth <= 0)
+                attacker.characterData.UpdateExp(characterData.killPoint);// 更新击杀者经验值
+        }
     }
 
     public void TakeDamage(int damage, CharacterStats defender)
