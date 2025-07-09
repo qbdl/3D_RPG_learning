@@ -9,5 +9,5 @@ AnimatorOverrideController:
   m_Name: NPC_SK_LILITH_02 Variant
   m_Controller: {fileID: 9100000, guid: 9e6286efe38ace74eb42172b3a6e7f9f, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: -4440848788435369991, guid: 2aa0290b67a899a4180d101131dbe006, type: 3}
-    m_OverrideClip: {fileID: 7570127044761214616, guid: 9aa48da9f3452d545b413056ff572716, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: f9fe39ae81f01b34cbd440bf39648514, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: eed89db7d1e198b458b53c5663b44466, type: 2}

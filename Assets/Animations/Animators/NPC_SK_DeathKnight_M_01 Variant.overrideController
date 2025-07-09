@@ -9,5 +9,5 @@ AnimatorOverrideController:
   m_Name: NPC_SK_DeathKnight_M_01 Variant
   m_Controller: {fileID: 9100000, guid: 9e6286efe38ace74eb42172b3a6e7f9f, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: -4440848788435369991, guid: 2aa0290b67a899a4180d101131dbe006, type: 3}
-    m_OverrideClip: {fileID: 3500441788533752169, guid: 91511b5a45e1ba74ea9a4fe911a9b831, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: f9fe39ae81f01b34cbd440bf39648514, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1464c6d57aec95d4c90a010f7c5aae30, type: 2}
