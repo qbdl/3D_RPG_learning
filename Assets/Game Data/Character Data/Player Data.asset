@@ -19,10 +19,12 @@ MonoBehaviour:
   killPoint: 0
   currentLevel: 1
   maxLevel: 30
-  baseExp: 50
+  baseExp: 30
   currentExp: 0
-  levelBuff: 0.1
   currentMoveSpeed: 3.5
   maxMoveSpeed: 6
   baseMoveSpeed: 3.5
-  speedGrowthRate: 0.05
+  expGrowRate: 0.06
+  hpGrowRate: 0.12
+  defGrowRate: 0.08
+  speedGrowRate: 0.04

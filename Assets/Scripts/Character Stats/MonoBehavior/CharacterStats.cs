@@ -21,6 +21,13 @@ public class CharacterStats : MonoBehaviour
     public Transform armorSlot; // 盔甲位置（用于对应的装上盔甲）
     private int equipmentNum; // 已装备的装备数量
 
+
+    [Header("Regeneration")]
+    public float regenInterval;       // 每隔多久回血
+    public int regenAmount;            // 每次回血多少点
+    private float regenTimer = 0;         // 计时器
+
+
     [HideInInspector]
     public bool isCritical;  // 是否暴击
     [HideInInspector]
@@ -40,6 +47,21 @@ public class CharacterStats : MonoBehaviour
         attackData = Instantiate(templateAttackData); // 克隆基础攻击数据
         baseAnimator = GetComponent<Animator>().runtimeAnimatorController; // 获取基础无装备时动画
         equipmentNum = 0;// 初始化已装备的装备数量
+    }
+
+    void Update()
+    {
+        // 缓慢回血逻辑（仅限玩家）
+        if (GetComponent<PlayerController>() != null && CurrentHealth > 0 && CurrentHealth < MaxHealth)
+        {
+            regenTimer += Time.deltaTime;
+            if (regenTimer >= regenInterval)
+            {
+                regenTimer = 0f;
+                CurrentHealth = Mathf.Min(CurrentHealth + regenAmount, MaxHealth);
+                UpdateHealthBarOnAttack?.Invoke(CurrentHealth, MaxHealth); // 更新血条
+            }
+        }
     }
 
     #region Read from Data_SO
@@ -72,6 +94,10 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(CharacterStats attacker, CharacterStats defender)
     {
+        //New : 加入内测无敌模式
+        if (GetComponent<PlayerController>() != null && GetComponent<PlayerController>().Invincibility)
+            return;
+
         //New : 加入盾反逻辑
         // 判断是否为玩家，并且是否处于盾反状态
         if (defender.GetComponent<PlayerController>() != null && defender.isDefend) //玩家盾反逻辑
@@ -117,6 +143,10 @@ public class CharacterStats : MonoBehaviour
 
     public void TakeDamage(int damage, CharacterStats defender)
     {
+        //New : 加入内测无敌模式
+        if (GetComponent<PlayerController>() != null && GetComponent<PlayerController>().Invincibility)
+            return;
+
         int currentDamage = Mathf.Max(damage - defender.CurrentDefence, 0);
         CurrentHealth = Mathf.Max(CurrentHealth - currentDamage, 0);
 
@@ -126,7 +156,6 @@ public class CharacterStats : MonoBehaviour
         if (CurrentHealth <= 0)
             GameManager.Instance.playerStats.characterData.UpdateExp(characterData.killPoint);// 更新击杀者经验值
     }
-
 
     private int CurrentDamage()
     {

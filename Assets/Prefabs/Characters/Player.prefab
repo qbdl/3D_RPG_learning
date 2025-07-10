@@ -1921,7 +1921,10 @@ MonoBehaviour:
   attackData: {fileID: 0}
   weaponSlot: {fileID: 3705491164806705892}
   armorSlot: {fileID: 3705491164806705930}
+  regenInterval: 4
+  regenAmount: 3
   isCritical: 0
+  isDefend: 0
 --- !u!1 &3705491164806344502
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,8 @@ MonoBehaviour:
   itemName: Shield
   itemIcon: {fileID: 21300000, guid: 74b521ec517dd064fa4404a7d67a95b3, type: 3}
   itemAmount: 1
-  itemDescription: "\u8FD9\u662F\u4E00\u5757\u666E\u901A\u7684\u76FE\u724C\uFF01"
+  itemDescription: "\u8FD9\u5757\u76FE\u724C\u878D\u5408\u4E86\u94A2\u94C1\u4E0E\u9B54\u529B\uFF0C\u7ECF\u8FC7\u591A\u6B21\u6218\u6597\u4F9D\u65E7\u575A\u56FA\u65E0\u6BD4\u3002\r\n\u5B83\u4E3A\u6301\u6709\u8005\u63D0\u4F9B\u5F3A\u5927\u7684\u9632\u5FA1\uFF0C\u8BA9\u4F60\u5728\u6218\u6597\u4E2D\u6BEB\u4E0D\u754F\u60E7\u3002\r\n\r\n\u9632\u5FA1\u503C 
+    \uFF1A7"
   itemStackable: 0
   useableItemData: {fileID: 0}
   weaponPrefab: {fileID: 0}

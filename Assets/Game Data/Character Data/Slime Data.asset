@@ -21,8 +21,10 @@ MonoBehaviour:
   maxLevel: 0
   baseExp: 0
   currentExp: 0
-  levelBuff: 0
   currentMoveSpeed: 0
   maxMoveSpeed: 0
   baseMoveSpeed: 0
-  speedGrowthRate: 0
+  expGrowRate: 0
+  hpGrowRate: 0
+  defGrowRate: 0
+  speedGrowRate: 0

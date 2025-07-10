@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     bool isDead; //是否死亡
     bool isShielding; //是否正在盾反
 
+    public bool Invincibility = false; //是否无敌
+
     private float stopDistance; //默认的停止距离
 
     /* ---------- Basic Function ---------- */
@@ -58,6 +60,19 @@ public class PlayerController : MonoBehaviour
 
         SwitchAnimation(); //每帧更新动画状态
         lastAttackTime -= Time.deltaTime; // 攻击冷却时间的衰减
+
+        //作弊码 ，用于内测使用
+        if (Input.GetKeyDown(KeyCode.F11)) //按下F11键 升级
+        {
+            characterStats.characterData.UpdateExp(characterStats.characterData.baseExp);
+            Debug.Log("<color=yellow>[Cheat]</color> Force Level Up (F1)");
+        }
+
+        if (Input.GetKeyDown(KeyCode.F12)) //按下F12键 切换无敌状态
+        {
+            Invincibility = !Invincibility;
+            Debug.Log($"<color=yellow>[Cheat]</color> Invincibility {(Invincibility ? "ON" : "OFF")} (F2)");
+        }
     }
 
     /* ---------------- --- ------------------- */

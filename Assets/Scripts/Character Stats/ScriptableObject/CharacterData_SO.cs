@@ -20,21 +20,26 @@ public class CharacterData_SO : ScriptableObject
     public int maxLevel;
     public int baseExp;
     public int currentExp;
-    public float levelBuff;
 
     [Header("Movement")]
     public float currentMoveSpeed;
     public float maxMoveSpeed;
     public float baseMoveSpeed;
-    public float speedGrowthRate;
 
-    public float LevelMultiplier
-    {
-        get { return 1 + (currentLevel - 1) * levelBuff; }
-    }
+    [Header("Growth Rate")]
+    [Tooltip("经验需求每级增加比例，例如 0.06 = +6%")]
+    [Range(0f, 1f)] public float expGrowRate;
+    [Tooltip("最大生命每级增加比例，例如 0.12 = +12%")]
+    [Range(0f, 1f)] public float hpGrowRate;
+    [Tooltip("基础防御每级增加比例，例如 0.08 = +8%")]
+    [Range(0f, 1f)] public float defGrowRate;
+    [Tooltip("移动速度每级增加比例，例如 0.04 = +4%")]
+    [Range(0f, 1f)] public float speedGrowRate;
 
     public void UpdateExp(int point)
     {
+        if (currentLevel >= maxLevel) return;
+
         currentExp += point;
         if (currentExp >= baseExp)
             LevelUp();
@@ -46,17 +51,17 @@ public class CharacterData_SO : ScriptableObject
 
         //所有提升的数据方法
         currentLevel = Mathf.Clamp(currentLevel + 1, 0, maxLevel); // 确保当前等级不超过最大等级
-        baseExp += (int)(baseExp * LevelMultiplier); // 下一阶段升级需要的经验值
 
-        maxHealth = (int)(maxHealth * LevelMultiplier); // 升级后最大生命值提升
+        baseExp = Mathf.CeilToInt(baseExp * (1f + expGrowRate)); // 下一阶段升级需要的经验值
+        maxHealth = Mathf.CeilToInt(maxHealth * (1f + hpGrowRate)); // 最大生命值提升
         currentHealth = maxHealth;
-        baseDefence = (int)(baseDefence * LevelMultiplier); // 升级后基础防御值提升 
+        baseDefence = Mathf.CeilToInt(baseDefence * (1f + defGrowRate)); // 基础防御值提升 
         currentDefence = baseDefence;
 
-        float newSpeed = baseMoveSpeed * (1.0f + speedGrowthRate * (currentLevel - 1)); // 新的移动速度
+        float newSpeed = baseMoveSpeed * (1.0f + speedGrowRate * (currentLevel - 1)); // 新的移动速度
         currentMoveSpeed = Mathf.Min(maxMoveSpeed, newSpeed);
 
-        //TODO:攻击值改变
+        // TODO: 如果有攻击力成长，可在此处补充
 
         Debug.Log($"Level Up! New Level: {currentLevel}, Max Health: {maxHealth}, Base Exp: {baseExp}");
     }
