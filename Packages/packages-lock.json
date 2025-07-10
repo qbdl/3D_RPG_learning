@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.saber.editordiy": {
-      "version": "file:D:/WorkSpace/UnityEditorWindowDIY",
+      "version": "file:UnityEditorWindowDIY",
       "depth": 0,
-      "source": "local",
+      "source": "embedded",
       "dependencies": {}
     },
     "com.unity.2d.sprite": {

@@ -63,7 +63,6 @@ TODO:放一个游戏视频
 git clone https://github.com/qbdl/3D_RPG_learning.git
 ```
 
-- 在Unity Hub中打开项目（如果有说缺少saber.xxx(那个是我用于编辑器界面的，不影响)，点击continue即可）
 - 大致5.4GB左右（素材有点多）
 
 - 代码格式：UTF-8（不同的格式会影响中文备注的显示）.
@@ -75,4 +74,10 @@ git clone https://github.com/qbdl/3D_RPG_learning.git
 
 如果不需要最后部分加入的编辑器扩展功能，即针对DialogueData_SO的扩展编辑，可以删除`Assets/Scripts/Editor`文件夹，这不会影响游戏的使用。
 
-如需使用，解注释即可。
+如需使用，解注释其中的代码即可。
+
+
+
+## :star2: 致谢
+
+感谢Michael老师的课程，感谢小琨与老王的测试！
