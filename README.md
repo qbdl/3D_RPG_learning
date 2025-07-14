@@ -57,7 +57,7 @@
 
 <video src="./Assets/Qbdl.mp4" controls width="700"></video>
 
-
+见[./Assets/Qbdl.mp4](./Assets/Qbdl.mp4)，github无法显示太大的视频文件，所以放在文件夹中了。
 
 
 
