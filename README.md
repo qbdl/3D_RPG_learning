@@ -26,11 +26,13 @@
 
 
 
-✨ 过程学习记录见`learning_record/学习过程记录.md`，git记录 参考视频采用增量开发的方法，也希望能帮助使用本仓库的你~。
+✨ 过程学习记录见 [学习过程记录.md](./learning_record/学习过程记录.md) ，git记录 参考视频采用增量开发的方法，也希望能帮助使用本仓库的你~。
 
 
 
 ## 🔮 游戏效果展示
+
+如果不考虑进一步开发，可以**直接下载仓库里的`Play-3D RPG Knight 2.0.zip`，解压后即可开始游戏**。
 
 ### 玩法说明
 
@@ -53,7 +55,7 @@
 
 ### 游戏效果视频
 
-TODO:放一个游戏视频
+<video src="./Assets/Qbdl.mp4"></video>
 
 
 
@@ -65,7 +67,11 @@ git clone https://github.com/qbdl/3D_RPG_learning.git
 
 - 大致5.4GB左右（素材有点多）
 
-- 代码格式：UTF-8（不同的格式会影响中文备注的显示）.
+- 代码格式：UTF-8（不同的格式会影响中文备注的显示）
+
+- 从Unity Hub导入本地的项目，然后加入后点击Scene里的对应场景，即可进行修改或者开始游戏。
+
+  <img src="./assets/image-20250710104111279.png" alt="image-20250710104111279" style="zoom:50%;" />
 
 
 
@@ -80,4 +86,4 @@ git clone https://github.com/qbdl/3D_RPG_learning.git
 
 ## :star2: 致谢
 
-感谢Michael老师的课程，感谢小琨与老王的测试！
+感谢Michael老师的课程，感谢小琨与老王的测试以及小琨的视频制作剪辑！
