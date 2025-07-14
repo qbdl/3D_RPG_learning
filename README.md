@@ -55,7 +55,9 @@
 
 ### 游戏效果视频
 
-<video src="./Assets/Qbdl.mp4"></video>
+<video src="./Assets/Qbdl.mp4" controls width="700"></video>
+
+
 
 
 
@@ -71,7 +73,7 @@ git clone https://github.com/qbdl/3D_RPG_learning.git
 
 - 从Unity Hub导入本地的项目，然后加入后点击Scene里的对应场景，即可进行修改或者开始游戏。
 
-  <img src="./assets/image-20250710104111279.png" alt="image-20250710104111279" style="zoom:50%;" />
+  <img src="./Assets/image-20250710104111279.png" alt="image-20250710104111279" style="zoom:50%;" />
 
 
 
